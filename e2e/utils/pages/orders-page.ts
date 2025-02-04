@@ -24,9 +24,7 @@ export class OrdersPage {
   async modifyLabOrder() {
     await this.page.getByRole('button', { name: /options/i }).nth(0).click();
     await this.page.getByRole('menuitem', { name: /modify order/i }).click();
-    await this.page.getByLabel(/clear selected item/i).click();
-    await this.page.getByLabel('Open', { exact: true }).click();
-    await this.page.getByText('Stat', { exact: true }).click();
+    await this.page.getByLabel(/priority/i).selectOption('STAT');
     await this.page.getByLabel(/additional instructions/i).fill('Take urine sample');
   }
 

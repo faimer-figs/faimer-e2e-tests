@@ -29,7 +29,7 @@ test('Add an appointment', async ({ page }) => {
   await appointmentsPage.addPatientAppointment();
 
   // verify
-  await expect(page.getByRole('cell', { name: /inpatient ward/i })).toBeVisible();
+  await expect(page.getByRole('cell', { name: /inpatient/i })).toBeVisible();
   await expect(page.getByRole('cell', { name: /general medicine service/i })).toBeVisible();
   await expect(page.getByRole('cell', { name: /scheduled/i }).nth(0)).toBeVisible();
   await expect(page.getByRole('cell', { name: /this is an appointment./i })).toBeVisible();
@@ -58,7 +58,7 @@ test('Cancel an appointment', async ({ page }) => {
   await visitsPage.startPatientVisit();
   await appointmentsPage.navigateToAppointmentsPage();
   await appointmentsPage.addPatientAppointment();
-  await expect(page.getByRole('cell', { name: /inpatient ward/i })).toBeVisible();
+  await expect(page.getByRole('cell', { name: /inpatient/i })).toBeVisible();
   await expect(page.getByRole('cell', { name: /general medicine service/i })).toBeVisible();
 
   // replay
