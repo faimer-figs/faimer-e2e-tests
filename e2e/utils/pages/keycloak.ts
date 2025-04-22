@@ -86,9 +86,9 @@ export class Keycloak {
   }
 
   async assignRoleToUser() {
-  await this.page.getByRole('textbox', { name: /search/i }).fill('openmrs');
+  await this.page.getByRole('textbox', { name: /search/i }).fill('FAIMER Learner');
   await this.page.getByRole('textbox', { name: /search/i }).press('Enter');
-  await this.page.getByRole('checkbox', { name: /select all rows/i }).check();
+  await this.page.getByRole('checkbox', { name: /select row/i }).check();
   await this.page.getByTestId('assign').click();
   await expect(this.page.getByText(/user role mapping successfully updated/i)).toBeVisible();
   }

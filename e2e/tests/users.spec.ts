@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 import { delay, HomePage } from '../utils/pages/home-page';
 import { Keycloak } from '../utils/pages/keycloak';
 import { VisitsPage } from '../utils/pages/visits-page';
+import { patientName } from '../utils/pages/registration-page';
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -35,25 +36,35 @@ test('User creation and data filtering', async ({ page }) => {
   // replay
   await homePage.navigateToLoginPage();
   await homePage.loginWithFirstUser();
-  await homePage.searchExistingPatient('100005L');
-  await page.getByRole('button', { name: /start a visit/i }).click();
-  await page.locator('label').filter({ hasText: 'Facility Visit' }).locator('span').first().click();
-  await page.locator('form').getByRole('button', { name: /start visit/i }).click();
-  await expect(page.getByText(/facility visit started successfully/i)).toBeVisible(), delay(3000);
-  await page.getByRole('button', { name: /close/i }).nth(1).click();
+  await homePage.searchPatient('DANIEL ACOSTA');
+  await expect(page.getByText('1 search result')).toBeVisible();
+  await page.getByRole('link', { name: `${patientName.firstName + ' ' + patientName.givenName}` }).first().click();
+  await homePage.searchPatientId();
+  const patientIdentifierForFirstSamplePatient = await page.locator('#demographics section p:nth-child(2)').textContent();
+  await homePage.searchPatient('DEVAN MODI');
+  await expect(page.getByText('1 search result')).toBeVisible();
+  await page.getByRole('link', { name: `${patientName.firstName + ' ' + patientName.givenName}` }).first().click();
+  await homePage.searchPatientId();
+  const patientIdentifierForSecondSamplePatient = await page.locator('#demographics section p:nth-child(2)').textContent();
+  await homePage.navigateToHomePage();
   await homePage.logout();
 
   // verify
   await homePage.loginWithSecondUser();
-  await homePage.searchExistingPatient('100005L');
-  await expect(page.getByText(/active visit/i)).not.toBeVisible();
-  await page.getByRole('button', { name: /close/i }).nth(1).click();
+  await homePage.searchPatient('DANIEL ACOSTA');
+  await expect(page.getByText('1 search result')).toBeVisible();
+  await page.locator('[data-testid="patientSearchBar"]').fill('DEVAN MODI'), delay(3000);
+  await expect(page.getByText('1 search result')).toBeVisible();
+  await page.locator('[data-testid="patientSearchBar"]').clear(), delay(1000);
+  await page.locator('[data-testid="patientSearchBar"]').fill(`${patientIdentifierForFirstSamplePatient}`), delay(3000);
+  await expect(page.getByText(/sorry, no patient charts were found/i)).toBeVisible();
+  await page.locator('[data-testid="patientSearchBar"]').clear(), delay(1000);
+  await page.locator('[data-testid="patientSearchBar"]').fill(`${patientIdentifierForSecondSamplePatient}`), delay(3000);
+  await expect(page.getByText(/sorry, no patient charts were found/i)).toBeVisible();
+  await page.locator('[data-testid="patientSearchBar"]').clear();
   await homePage.logout();
 });
 
 test.afterEach(async ({}) => {
-  await homePage.loginWithFirstUser();
-  await homePage.searchExistingPatient('100005L');
-  await visitsPage.endPatientVisit();
   await keycloak.deleteUser();
 });

@@ -57,14 +57,6 @@ export class HomePage {
     await this.navigateToHomePage();
     await this.patientSearchIcon().click();
     await this.patientSearchBar().fill(searchText);
-    await this.page.getByRole('link', { name: `${patientName.firstName + ' ' + patientName.givenName}` }).first().click();
-  }
-
-  async searchExistingPatient(searchText: string) {
-    await this.navigateToHomePage();
-    await this.patientSearchIcon().click();
-    await this.patientSearchBar().fill(searchText);
-    await this.page.getByRole('link', { name: `James Martinez` }).first().click();
   }
 
   async clickOnPatientResult(name: string) {
@@ -72,7 +64,6 @@ export class HomePage {
   }
 
   async searchPatientId() {
-    await this.searchPatient(`${patientName.firstName + ' ' + patientName.givenName}`);
     await this.page.getByRole('button', { name: /actions/i, exact: true }).click();
     await expect(this.editPatientButton()).toBeEnabled();
     await this.editPatientButton().click(), delay(4000);
