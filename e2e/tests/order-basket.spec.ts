@@ -37,7 +37,7 @@ test('Order basket should load all the orderables', async ({ page }) => {
   // verify
   await expect(page.getByText(/Drug orders/)).toBeVisible();
   await expect(page.getByText(/Lab orders/)).toBeVisible();
-  await expect(page.getByText(/imaging order/i)).toBeVisible();
+  await expect(page.getByText(/Imaging orders/)).toBeVisible();
 });
 
 test.afterEach(async ({ browser }) => {

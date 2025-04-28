@@ -187,6 +187,9 @@ export class ClinicalFormsPage {
   async fillProcedureNoteForm() {
     await this.page.locator('#procedureNoteProcedure').fill(procedure);
     await this.page.locator('#procedureNoteIndication').fill(indication);
+    await this.page.getByRole('spinbutton', { name: /month, date/i }).fill('04');
+    await this.page.getByRole('spinbutton', { name: /day, date/i }).fill('22');
+    await this.page.getByRole('spinbutton', { name: /year, date/i }).fill('2025');
     await this.page.locator('#procedureNotePhysician').fill(physcian);
     await this.page.locator('#procedureNoteConsent').fill(consent);
     await this.page.locator('label').filter({ hasText: /local anesthesia and sedation/i }).locator('span').first().click();
@@ -196,6 +199,8 @@ export class ClinicalFormsPage {
 
   async updateProcedureNote() {
     await this.page.getByRole('button', { name: /edit this encounter/i }).click();
+    await this.page.getByRole('spinbutton', { name: /month, date/i }).fill('03');
+    await this.page.getByRole('spinbutton', { name: /day, date/i }).fill('24')
     await this.page.locator('#procedureNoteConsent').fill(updatedConsent);
     await this.page.locator('label').filter({ hasText: /monitored anesthesia care/i }).locator('span').first().click();
     await this.page.locator('#procedureNoteProcedureSummary').fill(updatedProcedureSummary);
@@ -260,6 +265,9 @@ export class ClinicalFormsPage {
     await this.page.getByRole('textbox', { name: /complications/i }).fill('None');
     await this.page.getByRole('textbox', { name: /specimens/i }).fill(specimens);
     await this.page.getByRole('textbox', { name: /surgeon/i }).fill('Dr. Jane Smith');
+    await this.page.getByRole('spinbutton', { name: /month, time of procedure/i }).fill('04');
+    await this.page.getByRole('spinbutton', { name: /day, time of procedure/i }).fill('23');
+    await this.page.getByRole('spinbutton', { name: /year, time of procedure/i }).fill('2025');
     await this.page.getByRole('textbox', { name: /post-operative instructions/i }).fill(postOperativeInstructions);
   }
 
@@ -270,6 +278,9 @@ export class ClinicalFormsPage {
     await this.page.getByRole('spinbutton', { name: /estimated blood loss/i }).fill('1');
     await this.page.getByRole('textbox', { name: /specimens/i }).fill(updatedSpecimens);
     await this.page.getByRole('textbox', { name: /surgeon/i }).fill('Dr. John Smith');
+    await this.page.getByRole('spinbutton', { name: /month, time of procedure/i }).fill('04');
+    await this.page.getByRole('spinbutton', { name: /day, time of procedure/i }).fill('24');
+    await this.page.getByRole('spinbutton', { name: /year, time of procedure/i }).fill('2025');
     await this.page.getByRole('textbox', { name: /post-operative instructions/i }).fill(updatedPostOperativeInstructions);
     await this.page.getByRole('button', { name: /save/i }).click(), delay(2000);
   }

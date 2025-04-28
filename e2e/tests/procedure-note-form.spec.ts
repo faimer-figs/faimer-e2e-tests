@@ -55,6 +55,7 @@ test('Add procedure note', async ({ page }) => {
   await expect(page.locator('//span[normalize-space()="Indication"]/following-sibling::span[1]')).toHaveText(`${indication}`);
   await expect(page.locator('//span[normalize-space()="Physician"]/following-sibling::span[1]')).toHaveText(`${physcian}`);
   await expect(page.locator('//span[normalize-space()="Procedure Summary"]/following-sibling::span[1]')).toHaveText(`${procedureSummary}`);
+  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/2025-04-22/i);
   await expect(page.locator('//span[normalize-space()="Procedure"]/following-sibling::span[1]')).toHaveText(`${procedure}`);
   await expect(page.locator('//span[normalize-space()="Consent"]/following-sibling::span[1]')).toHaveText(`${consent}`);
   await expect(page.locator('//span[normalize-space()="Anesthesia Type"]/following-sibling::span[1]')).toHaveText(/local anesthesia and sedation/i);
@@ -79,6 +80,7 @@ test('Edit procedure note', async ({ page }) => {
   await page.getByRole('button', { name: /expand current row/i }).click();
   await expect(page.locator('//span[normalize-space()="Indication"]/following-sibling::span[1]')).toHaveText(`${indication}`);
   await expect(page.locator('//span[normalize-space()="Physician"]/following-sibling::span[1]')).toHaveText(`${physcian}`);
+  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/2025-04-22/i);
   await expect(page.locator('//span[normalize-space()="Procedure Summary"]/following-sibling::span[1]')).toHaveText(`${procedureSummary}`);
   await expect(page.locator('//span[normalize-space()="Procedure"]/following-sibling::span[1]')).toHaveText(`${procedure}`);
   await expect(page.locator('//span[normalize-space()="Consent"]/following-sibling::span[1]')).toHaveText(`${consent}`);
@@ -97,6 +99,8 @@ test('Edit procedure note', async ({ page }) => {
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
   await page.getByRole('button', { name: /expand current row/i }).click();
+  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).not.toHaveText(/2025-04-22/i);
+  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/2025-03-24/i);
   await expect(page.locator('//span[normalize-space()="Consent"]/following-sibling::span[1]')).not.toHaveText(`${consent}`);
   await expect(page.locator('//span[normalize-space()="Consent"]/following-sibling::span[1]')).toHaveText(`${updatedConsent}`);
   await expect(page.locator('//span[normalize-space()="Anesthesia Type"]/following-sibling::span[1]')).not.toHaveText(/local anesthesia and sedation/i);
@@ -125,6 +129,7 @@ test('Delete procedure note', async ({ page }) => {
   await page.getByRole('button', { name: /expand current row/i }).click();
   await expect(page.locator('//span[normalize-space()="Indication"]/following-sibling::span[1]')).toHaveText(`${indication}`);
   await expect(page.locator('//span[normalize-space()="Physician"]/following-sibling::span[1]')).toHaveText(`${physcian}`);
+  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/2025-04-22/i);
   await expect(page.locator('//span[normalize-space()="Procedure Summary"]/following-sibling::span[1]')).toHaveText(`${procedureSummary}`);
   await expect(page.locator('//span[normalize-space()="Procedure"]/following-sibling::span[1]')).toHaveText(`${procedure}`);
   await expect(page.locator('//span[normalize-space()="Consent"]/following-sibling::span[1]')).toHaveText(`${consent}`);

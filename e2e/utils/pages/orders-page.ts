@@ -35,7 +35,7 @@ export class OrdersPage {
     await expect(this.page.getByRole('cell', { name: /bacteriuria test, urine/i })).toBeVisible();
     await this.page.locator('#labReferenceNumberInput').fill('202');
     await this.page.getByLabel('Priority').selectOption('STAT');
-    await this.page.getByLabel(/additional instructions/i).fill('Take urine sample'), delay(3000);
+    await this.page.getByLabel(/additional instructions/i).fill('Take urine sample'), delay(2000);
   }
 
   async cancelLabOrder() {
@@ -70,7 +70,7 @@ export class OrdersPage {
     await this.page.getByPlaceholder('Frequency').click();
     await this.page.getByText('Thrice daily').click();
     await this.page.getByLabel('Duration', { exact: true }).fill('6');
-    await this.page.getByLabel(/quantity to dispense/i).fill('8'), delay(6000);
+    await this.page.getByLabel(/quantity to dispense/i).fill('8'), delay(2000);
     await this.page.getByRole('button', { name: /save order/i }).focus();
     await this.page.getByRole('button', { name: /save order/i }).dispatchEvent('click');
     await expect(this.page.getByText(/sign and close/i)).toBeVisible();
