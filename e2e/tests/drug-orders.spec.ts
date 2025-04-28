@@ -52,7 +52,7 @@ test('Add a drug order', async ({ page }) => {
   await expect(page.getByText(/indication hypertension/i).nth(0)).toBeVisible();
 });
 
-test.skip('Modify a drug order', async ({ page }) => {
+test('Modify a drug order', async ({ page }) => {
   // setup
   await homePage.navigateToLoginPage();
   await homePage.loginWithUser();
@@ -90,7 +90,7 @@ test.skip('Modify a drug order', async ({ page }) => {
   await expect(page.getByText(/6 days/i).nth(0)).toBeVisible();
 });
 
-test.skip('Discontinue a drug order', async ({ page }) => {
+test('Discontinue a drug order', async ({ page }) => {
   // setup
   await homePage.navigateToLoginPage();
   await homePage.loginWithUser();

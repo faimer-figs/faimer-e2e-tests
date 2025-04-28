@@ -47,7 +47,7 @@ test('Add a lab test', async ({ page }) => {
   await expect(page.getByRole('cell', { name: /bacteriuria test, urine/i })).toBeVisible();
 });
 
-test.skip('Modify a lab order', async ({ page }) => {
+test('Modify a lab order', async ({ page }) => {
   // setup
   await homePage.navigateToLoginPage();
   await homePage.loginWithUser();
@@ -75,7 +75,7 @@ test.skip('Modify a lab order', async ({ page }) => {
   await expect(page.getByRole('cell', { name: /stat/i })).toBeVisible();
 });
 
-test.skip('Discontinue a lab order', async ({ page }) => {
+test('Discontinue a lab order', async ({ page }) => {
   // setup
   await homePage.navigateToLoginPage();
   await homePage.loginWithUser();
