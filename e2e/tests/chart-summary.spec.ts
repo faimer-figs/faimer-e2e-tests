@@ -52,6 +52,7 @@ test('Patient summary to load all the apps', async ({ page }) => {
   await expect(page.getByText(/record program enrollments/i)).toBeVisible();
 });
 
+/*
 test.afterEach(async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -59,3 +60,4 @@ test.afterEach(async ({ browser }) => {
   await keycloak.deleteUser();
   await context.close();
 });
+*/

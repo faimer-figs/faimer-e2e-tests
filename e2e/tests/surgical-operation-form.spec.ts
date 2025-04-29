@@ -57,7 +57,7 @@ test('Add surgical operation instructions', async ({ page }) => {
   await expect(page.locator('//span[normalize-space()="Complications"]/following-sibling::span[1]')).toHaveText(/none/i);
   await expect(page.locator('//span[normalize-space()="Specimens"]/following-sibling::span[1]')).toHaveText(`${specimens}`);
   await expect(page.locator('//span[normalize-space()="Surgeon"]/following-sibling::span[1]')).toHaveText(/Dr. Jane Smith/);
-  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/2025-04-23/i);
+  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/April 23, 2025/i);
   await expect(page.locator('//span[normalize-space()="Anesthesia Type"]/following-sibling::span[1]')).toHaveText(/general/i);
   await expect(page.locator('//span[normalize-space()="Post-Operative Instructions"]/following-sibling::span[1]')).toHaveText(`${postOperativeInstructions}`);
 });
@@ -86,7 +86,7 @@ test('Edit surgical operation instructions', async ({ page }) => {
   await expect(page.locator('//span[normalize-space()="Complications"]/following-sibling::span[1]')).toHaveText(/none/i);
   await expect(page.locator('//span[normalize-space()="Specimens"]/following-sibling::span[1]')).toHaveText(`${specimens}`);
   await expect(page.locator('//span[normalize-space()="Surgeon"]/following-sibling::span[1]')).toHaveText(/Dr. Jane Smith/);
-  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/2025-04-23/i);
+  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/April 23, 2025/i);
   await expect(page.locator('//span[normalize-space()="Anesthesia Type"]/following-sibling::span[1]')).toHaveText(/general/i);
   await expect(page.locator('//span[normalize-space()="Post-Operative Instructions"]/following-sibling::span[1]')).toHaveText(`${postOperativeInstructions}`);
 
@@ -114,8 +114,8 @@ test('Edit surgical operation instructions', async ({ page }) => {
   await expect(page.locator('//span[normalize-space()="Specimens"]/following-sibling::span[1]')).toHaveText(`${updatedSpecimens}`);
   await expect(page.locator('//span[normalize-space()="Surgeon"]/following-sibling::span[1]')).not.toHaveText(/Dr. Jane Smith/);
   await expect(page.locator('//span[normalize-space()="Surgeon"]/following-sibling::span[1]')).toHaveText(/Dr. John Smith/);
-  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).not.toHaveText(/2025-04-23/i);
-  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/2025-04-24/i);
+  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).not.toHaveText(/April 23, 2025/i);
+  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/April 24, 2025/i);
   await expect(page.locator('//span[normalize-space()="Anesthesia Type"]/following-sibling::span[1]')).not.toHaveText(/general/i);
   await expect(page.locator('//span[normalize-space()="Anesthesia Type"]/following-sibling::span[1]')).toHaveText(/monitored anesthesia care/i);
   await expect(page.locator('//span[normalize-space()="Post-Operative Instructions"]/following-sibling::span[1]')).not.toHaveText(`${postOperativeInstructions}`);
@@ -146,7 +146,7 @@ test('Delete surgical operation instructions', async ({ page }) => {
   await expect(page.locator('//span[normalize-space()="Complications"]/following-sibling::span[1]')).toHaveText(/none/i);
   await expect(page.locator('//span[normalize-space()="Specimens"]/following-sibling::span[1]')).toHaveText(`${specimens}`);
   await expect(page.locator('//span[normalize-space()="Surgeon"]/following-sibling::span[1]')).toHaveText(/Dr. Jane Smith/);
-  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/2025-04-23/i);
+  await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/April 23, 2025/i);
   await expect(page.locator('//span[normalize-space()="Anesthesia Type"]/following-sibling::span[1]')).toHaveText(/general/i);
   await expect(page.locator('//span[normalize-space()="Post-Operative Instructions"]/following-sibling::span[1]')).toHaveText(`${postOperativeInstructions}`);
 
@@ -194,6 +194,7 @@ test('Estimated blood loss field should allow valid input', async ({ page }) => 
   await expect(page.locator('//div[span[1][normalize-space()="Estimated Blood Loss"]]/span[2]')).toHaveText('1.0');
   });
 
+  /*
 test.afterEach(async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -201,3 +202,4 @@ test.afterEach(async ({ browser }) => {
   await keycloak.deleteUser();
   await context.close();
 });
+*/

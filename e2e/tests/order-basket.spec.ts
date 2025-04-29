@@ -40,6 +40,7 @@ test('Order basket should load all the orderables', async ({ page }) => {
   await expect(page.getByText(/Imaging orders/)).toBeVisible();
 });
 
+/*
 test.afterEach(async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -47,3 +48,4 @@ test.afterEach(async ({ browser }) => {
   await keycloak.deleteUser();
   await context.close();
 });
+*/

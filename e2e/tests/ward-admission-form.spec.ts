@@ -186,6 +186,7 @@ test('Creating ward admission request should create admission request in the res
   await expect(page.getByText('Florencia Klinger')).toBeVisible();
 });
 
+/*
 test.afterEach(async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -193,3 +194,4 @@ test.afterEach(async ({ browser }) => {
   await keycloak.deleteUser();
   await context.close();
 });
+*/

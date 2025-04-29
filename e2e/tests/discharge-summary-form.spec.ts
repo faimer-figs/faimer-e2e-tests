@@ -158,6 +158,7 @@ test('Delete discharge summary', async ({ page }) => {
   await expect(page.getByText(/There are no encounters to display for this patient/).nth(0)).toBeVisible();
 });
 
+/*
 test.afterEach(async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -165,3 +166,4 @@ test.afterEach(async ({ browser }) => {
   await keycloak.deleteUser();
   await context.close();
 });
+*/

@@ -41,6 +41,7 @@ test('Demo patients should be present and accessible through patient search', as
   await homePage.patientSearchBar().clear(), delay(1000);
 });
 
+/*
 test.afterEach(async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -48,3 +49,4 @@ test.afterEach(async ({ browser }) => {
   await keycloak.deleteUser();
   await context.close();
 });
+*/

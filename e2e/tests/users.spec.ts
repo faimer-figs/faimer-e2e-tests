@@ -95,6 +95,7 @@ test('User creation and data filtering', async ({ page }) => {
   await homePage.logout();
 });
 
+/*
 test.afterEach(async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -102,3 +103,4 @@ test.afterEach(async ({ browser }) => {
   await keycloak.deleteUsers();
   await context.close();
 });
+*/

@@ -14,6 +14,7 @@ let ordersPage: OrdersPage;
 test.beforeEach(async ({ page, context }) => {
   await context.clearCookies();
   await context.clearPermissions();
+
   homePage = new HomePage(page);
   keycloak = new Keycloak(page);
   visitsPage = new VisitsPage(page);
@@ -155,6 +156,7 @@ test('Add a drug order with free text dosage', async ({ page }) => {
   await expect(page.getByText(/indication hypertension/i).nth(0)).toBeVisible();
 });
 
+/*
 test.afterEach(async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -162,3 +164,4 @@ test.afterEach(async ({ browser }) => {
   await keycloak.deleteUser();
   await context.close();
 });
+*/

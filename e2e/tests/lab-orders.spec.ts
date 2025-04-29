@@ -14,6 +14,7 @@ let ordersPage: OrdersPage;
 test.beforeEach(async ({ page, context }) => {
   await context.clearCookies();
   await context.clearPermissions();
+
   homePage = new HomePage(page);
   keycloak = new Keycloak(page);
   visitsPage = new VisitsPage(page);
@@ -107,6 +108,7 @@ test('Discontinue a lab order', async ({ page }) => {
   await expect(page.locator("//tr[td[text()='Test order'] and td[text()='Complete blood count']]//div[@data-priority='routine']")).not.toBeVisible();
 });
 
+/*
 test.afterEach(async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -114,3 +116,4 @@ test.afterEach(async ({ browser }) => {
   await keycloak.deleteUser();
   await context.close();
 });
+*/

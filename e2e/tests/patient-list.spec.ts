@@ -146,6 +146,7 @@ test('Patient list created by one user should not be visible to another user', a
   await expect(page.getByText(patientListName)).not.toBeVisible();
 });
 
+/*
 test.afterEach(async ({ browser }) => {
   const context = await browser.newContext();
   const page = await context.newPage();
@@ -153,3 +154,4 @@ test.afterEach(async ({ browser }) => {
   await keycloak.deleteUser();
   await context.close();
 });
+*/

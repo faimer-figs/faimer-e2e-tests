@@ -8,7 +8,7 @@ const config: PlaywrightTestConfig = {
   expect: {
     timeout: 40 * 1000,
   },
-  fullyParallel: true,
+  fullyParallel: false,
   forbidOnly: !!process.env.CI,
   workers: process.env.CI ? 1 : 1,
   retries: 0,
@@ -23,6 +23,11 @@ const config: PlaywrightTestConfig = {
       use: {
         ...devices['Desktop Chromium'],
         viewport: { width: 1920, height: 1080 },
+        screenshot: 'only-on-failure',
+        storageState: undefined,
+        launchOptions: {
+          args: ['--incognito', '--disable-cache', '--disable-application-cache']
+        },
       },
       
     },
