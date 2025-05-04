@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
+import { test } from '../utils/configs/globalSetup';
 import { delay, HomePage} from '../utils/pages/home-page';
 import { Keycloak } from '../utils/pages/keycloak';
 import { VisitsPage } from '../utils/pages/visits-page';
@@ -22,15 +23,15 @@ test.beforeEach(async ({ page }) => {
   keycloak = new Keycloak(page);
   visitsPage = new VisitsPage(page);
   formsPage = new ClinicalFormsPage(page);
-
-  await keycloak.open();
-  await keycloak.navigateToUsers();
-  await keycloak.addUserButton().click();
-  await keycloak.createUser();
 });
 
 test('Add ward admission request', async ({ page }) => {
   // setup
+  await keycloak.open();
+  await keycloak.navigateToUsers();
+  await keycloak.addUserButton().click();
+  await keycloak.createUser();
+
   await homePage.navigateToLoginPage();
   await homePage.loginWithUser();
   await homePage.patientSearchIcon().click();
@@ -64,6 +65,11 @@ test('Add ward admission request', async ({ page }) => {
 
 test('Edit ward admission request', async ({ page }) => {
   // setup
+  await keycloak.open();
+  await keycloak.navigateToUsers();
+  await keycloak.addUserButton().click();
+  await keycloak.createUser();
+
   await homePage.navigateToLoginPage();
   await homePage.loginWithUser();
   await homePage.patientSearchIcon().click();
@@ -122,6 +128,11 @@ test('Edit ward admission request', async ({ page }) => {
 
 test('Delete ward admission request', async ({ page }) => {
   // setup
+  await keycloak.open();
+  await keycloak.navigateToUsers();
+  await keycloak.addUserButton().click();
+  await keycloak.createUser();
+
   await homePage.navigateToLoginPage();
   await homePage.loginWithUser();
   await homePage.patientSearchIcon().click();
