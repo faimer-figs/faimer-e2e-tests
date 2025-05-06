@@ -11,7 +11,7 @@
     "!playwright-report/"
   ],
   "scripts": {
-    "faimer-e2e": "npx playwright test visit-note patient-search"
+    "faimer-e2e": "npx playwright test form order-basket visits chart iframe patient users "
   },
   "keywords": [],
   "author": "",
