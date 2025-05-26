@@ -6,6 +6,11 @@ import {VisitsPage} from '../utils/pages/visits-page';
 import {ChartPage} from '../utils/pages/chart-page';
 import {OrdersPage} from '../utils/pages/orders-page';
 import {ClinicalFormsPage} from "../utils/pages/clinical-forms-page";
+import {
+    runAddDischargeSummaryTest,
+    runDeleteDischargeSummaryTest,
+    runEditDischargeSummaryTest
+} from "./discharge-summary-form.spec";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -181,4 +186,32 @@ async function cleanup(browser: Browser) {
     await keycloak.deleteUser();
     await context.close();
 }
+
+export const config = {
+    target: 'https://oz-faimer-dev.mekomsolutions.net',
+    engines: {
+        playwright: {
+            timeout: 60000
+        }
+    }
+};
+
+export const scenarios = [
+    {
+        engine: 'playwright',
+        testFunction: runAddDrugOrderTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runModifyDrugOrderTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runDiscontinueDrugOrderTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runAddDrugOrderWithFreeTextDosageTest
+    }
+];
 

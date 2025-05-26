@@ -11,6 +11,7 @@ import {
 } from '../utils/pages/patient-lists-page';
 import {VisitsPage} from "../utils/pages/visits-page";
 import {ChartPage} from "../utils/pages/chart-page";
+import {runOrderBasketLoadAllOrderablesTest} from "./order-basket.spec";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -182,3 +183,34 @@ async function cleanup(browser: Browser) {
     await context.close();
 }
 
+export const config = {
+    target: 'https://oz-faimer-dev.mekomsolutions.net',
+    engines: {
+        playwright: {
+            timeout: 60000
+        }
+    }
+};
+
+export const scenarios = [
+    {
+        engine: 'playwright',
+        testFunction: runCreatePatientListTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runEditPatientListTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runDeletePatientListTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runManagePatientListTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runPatientListVisibilityCheckTest
+    }
+];

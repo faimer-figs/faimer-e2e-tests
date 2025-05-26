@@ -1,5 +1,4 @@
 import {Browser, expect, Page} from '@playwright/test';
-import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 
@@ -65,3 +64,20 @@ async function cleanup(browser: Browser) {
     await keycloak.deleteUser();
     await context.close();
 }
+
+export const config = {
+    target: 'https://oz-faimer-dev.mekomsolutions.net',
+    engines: {
+        playwright: {
+            timeout: 60000
+        }
+    }
+};
+
+export const scenarios = [
+    {
+        engine: 'playwright',
+        testFunction: runPatientSummaryTest
+    }
+];
+

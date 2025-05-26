@@ -12,6 +12,7 @@ import {
     updatedPostOperativeInstructions,
     updatedSpecimens
 } from '../utils/pages/clinical-forms-page';
+import {runAddSoapNoteTest, runDeleteSoapNoteTest, runEditSoapNoteTest} from "./soap-note-form.spec";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -223,3 +224,30 @@ async function cleanup(browser: Browser) {
     await context.close();
 }
 
+export const config = {
+    target: 'https://oz-faimer-dev.mekomsolutions.net',
+    engines: {
+        playwright: {
+            timeout: 60000
+        }
+    }
+};
+
+export const scenarios = [
+    {
+        engine: 'playwright',
+        testFunction: runAddSurgicalOperationInstructionTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runEditSurgicalOperationInstructionTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runDeleteSurgicalOperationInstructionTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runEstimateBloodLossFieldFieldValidationTest
+    }
+];

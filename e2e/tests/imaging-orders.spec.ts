@@ -5,6 +5,7 @@ import {Keycloak} from '../utils/pages/keycloak';
 import {VisitsPage} from '../utils/pages/visits-page';
 import {ChartPage} from '../utils/pages/chart-page';
 import {OrdersPage} from '../utils/pages/orders-page';
+import {runRenderIframeTest} from "./iframe.spec";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -130,3 +131,26 @@ async function cleanup(browser: Browser) {
     await context.close();
 }
 
+export const config = {
+    target: 'https://oz-faimer-dev.mekomsolutions.net',
+    engines: {
+        playwright: {
+            timeout: 60000
+        }
+    }
+};
+
+export const scenarios = [
+    {
+        engine: 'playwright',
+        testFunction: runAddImagingOrderTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runModifyImagingOrderTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runDiscontinueImagingOrderTest
+    }
+];

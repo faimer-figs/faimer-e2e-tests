@@ -16,6 +16,11 @@ import {
     updatedDischargeMedications,
     updatedHospitalCourse
 } from '../utils/pages/clinical-forms-page';
+import {
+    runAddDischargeInstructionsTest,
+    runDeleteDischargeInstructionsTest,
+    runEditDischargeInstructionsTest
+} from "./discharge-instructions-form.spec";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -182,4 +187,29 @@ async function cleanup(browser: Browser) {
     await keycloak.deleteUser();
     await context.close();
 }
+
+
+export const config = {
+    target: 'https://oz-faimer-dev.mekomsolutions.net',
+    engines: {
+        playwright: {
+            timeout: 60000
+        }
+    }
+};
+
+export const scenarios = [
+    {
+        engine: 'playwright',
+        testFunction: runAddDischargeSummaryTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runEditDischargeSummaryTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runDeleteDischargeSummaryTest
+    }
+];
 

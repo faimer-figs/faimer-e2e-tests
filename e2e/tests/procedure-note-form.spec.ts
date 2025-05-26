@@ -15,6 +15,12 @@ import {
     updatedConsent,
     updatedProcedureSummary
 } from '../utils/pages/clinical-forms-page';
+import {
+    runSearchPatientByAgeTest, runSearchPatientByDateOfBirthTest,
+    runSearchPatientByFullNameTest,
+    runSearchPatientByGivenNameTest,
+    runSearchPatientByIdentifierTest, runSearchPatientByPostalCodeTest
+} from "./patient-search.spec";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -177,3 +183,26 @@ async function cleanup(browser: Browser) {
     await context.close();
 }
 
+export const config = {
+    target: 'https://oz-faimer-dev.mekomsolutions.net',
+    engines: {
+        playwright: {
+            timeout: 60000
+        }
+    }
+};
+
+export const scenarios = [
+    {
+        engine: 'playwright',
+        testFunction: runAddProcedureNoteTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runEditProcedureNoteTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runDeleteProcedureNoteTest
+    }
+];

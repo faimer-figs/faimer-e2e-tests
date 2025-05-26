@@ -5,6 +5,7 @@ import {Keycloak} from '../utils/pages/keycloak';
 import {VisitsPage} from '../utils/pages/visits-page';
 import {ChartPage} from '../utils/pages/chart-page';
 import {OrdersPage} from '../utils/pages/orders-page';
+import {runAddImagingOrderTest, runDiscontinueImagingOrderTest, runModifyImagingOrderTest} from "./imaging-orders.spec";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -128,3 +129,27 @@ async function cleanup(browser: Browser) {
     await keycloak.deleteUser();
     await context.close();
 }
+
+export const config = {
+    target: 'https://oz-faimer-dev.mekomsolutions.net',
+    engines: {
+        playwright: {
+            timeout: 60000
+        }
+    }
+};
+
+export const scenarios = [
+    {
+        engine: 'playwright',
+        testFunction: runAddLabOrderTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runModifyLabOrderTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runDiscontinueLabOrderTest
+    }
+];

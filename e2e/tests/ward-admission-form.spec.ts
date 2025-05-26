@@ -12,6 +12,7 @@ import {
     updatedConsults,
     updatedAttendingPhysician,
 } from '../utils/pages/clinical-forms-page';
+import {runEditPatientVisitTest, runEndPatientVisitTest, runStartPatientVisitTest} from "./visits.spec";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -215,3 +216,30 @@ async function cleanup(browser: Browser) {
     await context.close();
 }
 
+export const config = {
+    target: 'https://oz-faimer-dev.mekomsolutions.net',
+    engines: {
+        playwright: {
+            timeout: 60000
+        }
+    }
+};
+
+export const scenarios = [
+    {
+        engine: 'playwright',
+        testFunction: runAddWardAdmissionRequestTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runEditWardAdmissionRequestTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runDeleteWardAdmissionRequestTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runCreateWardAdmissionRequestTest
+    }
+];

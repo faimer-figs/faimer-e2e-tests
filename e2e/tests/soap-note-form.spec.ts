@@ -15,6 +15,7 @@ import {
     updatedSubjectiveFindings
 } from '../utils/pages/clinical-forms-page';
 import {btoa} from "node:buffer";
+import {runSamplePatientsCreatedUponFirstLoginTest} from "./sample-patients.spec";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -162,3 +163,26 @@ async function cleanup(browser: Browser) {
     await context.close();
 }
 
+export const config = {
+    target: 'https://oz-faimer-dev.mekomsolutions.net',
+    engines: {
+        playwright: {
+            timeout: 60000
+        }
+    }
+};
+
+export const scenarios = [
+    {
+        engine: 'playwright',
+        testFunction: runAddSoapNoteTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runEditSoapNoteTest
+    },
+    {
+        engine: 'playwright',
+        testFunction: runDeleteSoapNoteTest
+    }
+];
