@@ -11,10 +11,9 @@
     "!playwright-report/"
   ],
   "scripts": {
-    "faimer-e2e": "npx playwright test"
+    "faimer-e2e": "npx playwright test results"
   },
   "keywords": [],
-  "author": "",
   "devDependencies": {
     "@playwright/test": "^1.52.0",
     "@types/node": "^20.8.10",
