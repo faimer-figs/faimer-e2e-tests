@@ -1,16 +1,9 @@
 import {expect, Page} from '@playwright/test';
-import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 import {VisitsPage} from '../utils/pages/visits-page';
 import {ChartPage} from '../utils/pages/chart-page';
 import {OrdersPage} from '../utils/pages/orders-page';
-import {ClinicalFormsPage} from "../utils/pages/clinical-forms-page";
-import {
-    runAddDischargeSummaryTest,
-    runDeleteDischargeSummaryTest,
-    runEditDischargeSummaryTest
-} from "./discharge-summary-form.spec";
 import {cleanup} from "./utils";
 
 let homePage: HomePage;
@@ -35,6 +28,7 @@ async function setup(page: Page) {
 
 // Add a drug order
 export async function runAddDrugOrderTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -69,6 +63,7 @@ export async function runAddDrugOrderTest(page: Page) {
 
 // Modify a drug order
 export async function runModifyDrugOrderTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -109,6 +104,7 @@ export async function runModifyDrugOrderTest(page: Page) {
 
 // Discontinue a drug order
 export async function runDiscontinueDrugOrderTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -144,6 +140,7 @@ export async function runDiscontinueDrugOrderTest(page: Page) {
 
 // Add a drug order with free text dosage
 export async function runAddDrugOrderWithFreeTextDosageTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -179,32 +176,3 @@ export async function runAddDrugOrderWithFreeTextDosageTest(page: Page) {
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runAddDrugOrderTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runModifyDrugOrderTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runDiscontinueDrugOrderTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runAddDrugOrderWithFreeTextDosageTest
-    }
-];
-

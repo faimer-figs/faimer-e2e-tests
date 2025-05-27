@@ -1,58 +1,58 @@
 import {test} from '../utils/configs/globalSetup';
-import {runPatientSummaryTest} from "./chart-summary.spec";
-import {runDemoPatientsTest} from "./demo-patients.spec";
+import {runPatientSummaryTest} from "./chart-summary";
+import {runDemoPatientsTest} from "./demo-patients";
 import {
     runAddDischargeInstructionsTest,
     runDeleteDischargeInstructionsTest,
     runEditDischargeInstructionsTest
-} from "./discharge-instructions-form.spec";
+} from "./discharge-instructions-form";
 import {
     runAddDischargeSummaryTest,
     runDeleteDischargeSummaryTest,
     runEditDischargeSummaryTest
-} from "./discharge-summary-form.spec";
+} from "./discharge-summary-form";
 import {
     runAddDrugOrderTest,
     runAddDrugOrderWithFreeTextDosageTest,
     runDiscontinueDrugOrderTest,
     runModifyDrugOrderTest
-} from "./drug-orders.spec";
-import {runEditPatientDetailsTest} from "./edit-patient-details.spec";
-import {runRenderIframeTest} from "./iframe.spec";
-import {runAddImagingOrderTest, runDiscontinueImagingOrderTest, runModifyImagingOrderTest} from "./imaging-orders.spec";
-import {runAddLabOrderTest, runDiscontinueLabOrderTest, runModifyLabOrderTest} from "./lab-orders.spec";
-import {runOrderBasketLoadAllOrderablesTest} from "./order-basket.spec";
+} from "./drug-orders";
+import {runEditPatientDetailsTest} from "./edit-patient-details";
+import {runRenderIframeTest} from "./iframe";
+import {runAddImagingOrderTest, runDiscontinueImagingOrderTest, runModifyImagingOrderTest} from "./imaging-orders";
+import {runAddLabOrderTest, runDiscontinueLabOrderTest, runModifyLabOrderTest} from "./lab-orders";
+import {runOrderBasketLoadAllOrderablesTest} from "./order-basket";
 import {
     runCreatePatientListTest,
     runDeletePatientListTest,
     runEditPatientListTest,
     runManagePatientListTest, runPatientListVisibilityCheckTest
-} from "./patient-list.spec";
+} from "./patient-list";
 import {
     runSearchPatientByAgeTest, runSearchPatientByDateOfBirthTest,
     runSearchPatientByFullNameTest,
     runSearchPatientByGivenNameTest,
     runSearchPatientByIdentifierTest, runSearchPatientByPostalCodeTest
-} from "./patient-search.spec";
+} from "./patient-search";
 import {
     runAddProcedureNoteTest,
     runDeleteProcedureNoteTest,
     runEditProcedureNoteTest
-} from "./procedure-note-form.spec";
-import {runSamplePatientsCreatedUponFirstLoginTest} from "./sample-patients.spec";
-import {runAddSoapNoteTest, runDeleteSoapNoteTest, runEditSoapNoteTest} from "./soap-note-form.spec";
+} from "./procedure-note-form";
+import {runSamplePatientsCreatedUponFirstLoginTest} from "./sample-patients";
+import {runAddSoapNoteTest, runDeleteSoapNoteTest, runEditSoapNoteTest} from "./soap-note-form";
 import {
     runAddSurgicalOperationInstructionTest, runDeleteSurgicalOperationInstructionTest,
     runEditSurgicalOperationInstructionTest, runEstimateBloodLossFieldFieldValidationTest
-} from "./surgical-operation-form.spec";
-import {runUserCreationAndFilteringTest} from "./users.spec";
-import {runAddVisitNoteTest, runDeleteVisitNoteTest, runEditVisitNoteTest} from "./visit-note-form.spec";
-import {runEditPatientVisitTest, runEndPatientVisitTest, runStartPatientVisitTest} from "./visits.spec";
+} from "./surgical-operation-form";
+import {runUserCreationAndFilteringTest} from "./users";
+import {runAddVisitNoteTest, runDeleteVisitNoteTest, runEditVisitNoteTest} from "./visit-note-form";
+import {runEditPatientVisitTest, runEndPatientVisitTest, runStartPatientVisitTest} from "./visits";
 import {
     runAddWardAdmissionRequestTest, runCreateWardAdmissionRequestTest,
     runDeleteWardAdmissionRequestTest,
     runEditWardAdmissionRequestTest
-} from "./ward-admission-form.spec";
+} from "./ward-admission-form";
 
 test('Patient summary to load all the apps', async ({page}) => {
     await runPatientSummaryTest(page);

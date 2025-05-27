@@ -1,13 +1,6 @@
 import {expect, Page} from '@playwright/test';
-import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
-import {
-    runCreatePatientListTest,
-    runDeletePatientListTest,
-    runEditPatientListTest,
-    runManagePatientListTest, runPatientListVisibilityCheckTest
-} from "./patient-list.spec";
 import {cleanup} from "./utils";
 
 let homePage: HomePage;
@@ -25,6 +18,7 @@ async function setup(page: Page) {
 
 // Search patient by given name
 export async function runSearchPatientByGivenNameTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -47,6 +41,7 @@ export async function runSearchPatientByGivenNameTest(page: Page) {
 
 // Search patient by full name
 export async function runSearchPatientByFullNameTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -69,6 +64,7 @@ export async function runSearchPatientByFullNameTest(page: Page) {
 
 // Search patient by identifier
 export async function runSearchPatientByIdentifierTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -91,6 +87,7 @@ export async function runSearchPatientByIdentifierTest(page: Page) {
 
 // Search patient by postal code
 export async function runSearchPatientByPostalCodeTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -119,6 +116,7 @@ export async function runSearchPatientByPostalCodeTest(page: Page) {
 
 // Search patient by age
 export async function runSearchPatientByAgeTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -148,6 +146,7 @@ export async function runSearchPatientByAgeTest(page: Page) {
 
 // Search patient by date of birth
 export async function runSearchPatientByDateOfBirthTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -176,39 +175,3 @@ export async function runSearchPatientByDateOfBirthTest(page: Page) {
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runSearchPatientByGivenNameTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runSearchPatientByFullNameTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runSearchPatientByIdentifierTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runSearchPatientByPostalCodeTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runSearchPatientByAgeTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runSearchPatientByDateOfBirthTest
-    }
-];

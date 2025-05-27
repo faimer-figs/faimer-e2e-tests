@@ -35,6 +35,7 @@ async function setup(page: Page) {
 
 // Add discharge instructions
 export async function runAddDischargeInstructionsTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -67,6 +68,7 @@ export async function runAddDischargeInstructionsTest(page: Page) {
 
 // Edit discharge instructions
 export async function runEditDischargeInstructionsTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -117,6 +119,7 @@ export async function runEditDischargeInstructionsTest(page: Page) {
 
 // Delete discharge instructions
 export async function runDeleteDischargeInstructionsTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -155,27 +158,3 @@ export async function runDeleteDischargeInstructionsTest(page: Page) {
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runAddDischargeInstructionsTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runEditDischargeInstructionsTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runDeleteDischargeInstructionsTest
-    }
-];

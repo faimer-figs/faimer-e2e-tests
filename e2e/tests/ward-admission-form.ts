@@ -1,5 +1,4 @@
 import {expect, Page} from '@playwright/test';
-import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 import {VisitsPage} from '../utils/pages/visits-page';
@@ -12,7 +11,6 @@ import {
     updatedConsults,
     updatedAttendingPhysician,
 } from '../utils/pages/clinical-forms-page';
-import {runEditPatientVisitTest, runEndPatientVisitTest, runStartPatientVisitTest} from "./visits.spec";
 import {cleanup} from "./utils";
 
 let homePage: HomePage;
@@ -34,6 +32,7 @@ async function setup(page: Page) {
 
 // Add ward admission request
 export async function runAddWardAdmissionRequestTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -72,6 +71,7 @@ export async function runAddWardAdmissionRequestTest(page: Page) {
 
 // Edit ward admission request
 export async function runEditWardAdmissionRequestTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -135,6 +135,7 @@ export async function runEditWardAdmissionRequestTest(page: Page) {
 
 // Delete ward admission request
 export async function runDeleteWardAdmissionRequestTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -182,6 +183,7 @@ export async function runDeleteWardAdmissionRequestTest(page: Page) {
 
 // Creating ward admission request should create admission request in the respective location
 export async function runCreateWardAdmissionRequestTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -208,31 +210,3 @@ export async function runCreateWardAdmissionRequestTest(page: Page) {
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runAddWardAdmissionRequestTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runEditWardAdmissionRequestTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runDeleteWardAdmissionRequestTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runCreateWardAdmissionRequestTest
-    }
-];

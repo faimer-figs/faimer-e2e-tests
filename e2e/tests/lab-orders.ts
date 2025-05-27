@@ -1,11 +1,9 @@
 import {expect, Page} from '@playwright/test';
-import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 import {VisitsPage} from '../utils/pages/visits-page';
 import {ChartPage} from '../utils/pages/chart-page';
 import {OrdersPage} from '../utils/pages/orders-page';
-import {runAddImagingOrderTest, runDiscontinueImagingOrderTest, runModifyImagingOrderTest} from "./imaging-orders.spec";
 import {cleanup} from "./utils";
 
 let homePage: HomePage;
@@ -29,6 +27,7 @@ async function setup(page: Page) {
 
 // Add a lab test
 export async function runAddLabOrderTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -58,6 +57,7 @@ export async function runAddLabOrderTest(page: Page) {
 
 // Modify a lab order
 export async function runModifyLabOrderTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -93,6 +93,7 @@ export async function runModifyLabOrderTest(page: Page) {
 
 // Discontinue a lab order
 export async function runDiscontinueLabOrderTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -122,27 +123,3 @@ export async function runDiscontinueLabOrderTest(page: Page) {
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runAddLabOrderTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runModifyLabOrderTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runDiscontinueLabOrderTest
-    }
-];

@@ -2,10 +2,6 @@ import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
-import {
-    runAddSurgicalOperationInstructionTest, runDeleteSurgicalOperationInstructionTest,
-    runEditSurgicalOperationInstructionTest, runEstimateBloodLossFieldFieldValidationTest
-} from "./surgical-operation-form.spec";
 import {cleanup} from "./utils";
 
 let homePage: HomePage;
@@ -18,6 +14,7 @@ async function setup(page: Page) {
 
 // User creation and data filtering
 export async function runUserCreationAndFilteringTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -104,19 +101,3 @@ export async function runUserCreationAndFilteringTest(page: Page) {
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runUserCreationAndFilteringTest
-    }
-];

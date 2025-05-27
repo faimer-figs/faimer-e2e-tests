@@ -1,11 +1,9 @@
 import {expect, Page} from '@playwright/test';
-import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 import {VisitsPage} from '../utils/pages/visits-page';
 import {ChartPage} from '../utils/pages/chart-page';
 import {OrdersPage} from '../utils/pages/orders-page';
-import {runRenderIframeTest} from "./iframe.spec";
 import {cleanup} from "./utils";
 
 let homePage: HomePage;
@@ -30,6 +28,7 @@ async function setup(page: Page) {
 
 // Add an imaging order
 export async function runAddImagingOrderTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -59,6 +58,7 @@ export async function runAddImagingOrderTest(page: Page) {
 
 // Modify an imaging order
 export async function runModifyImagingOrderTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -94,6 +94,7 @@ export async function runModifyImagingOrderTest(page: Page) {
 
 // Discontinue an imaging order
 export async function runDiscontinueImagingOrderTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -123,27 +124,3 @@ export async function runDiscontinueImagingOrderTest(page: Page) {
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runAddImagingOrderTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runModifyImagingOrderTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runDiscontinueImagingOrderTest
-    }
-];

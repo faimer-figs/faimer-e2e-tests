@@ -22,6 +22,7 @@ async function setup(page: Page) {
 
 // Edit patient details
 export async function runEditPatientDetailsTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -53,21 +54,3 @@ export async function runEditPatientDetailsTest(page: Page) {
 
     await cleanup(page)
 }
-
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runEditPatientDetailsTest
-    }
-];
-

@@ -18,6 +18,7 @@ async function setup(page: Page) {
 
 // Patient summary to load all the apps
 export async function runPatientSummaryTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -57,20 +58,3 @@ export async function runPatientSummaryTest(page: Page) {
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runPatientSummaryTest
-    }
-];
-

@@ -16,8 +16,9 @@ async function setup(page: Page) {
     await keycloak.createUser();
 }
 
-//Demo patients should be present and accessible through patient search
-export async function runDemoPatientsTest(page: Page) {
+// Sample patients should be created upon the first user login
+export async function runSamplePatientsCreatedUponFirstLoginTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -28,39 +29,21 @@ export async function runDemoPatientsTest(page: Page) {
 
     // verify
     await homePage.patientSearchIcon().click();
-    await homePage.patientSearchBar().fill('Betty Williams'), delay(3000);
+    await homePage.patientSearchBar().fill('Daniel Acosta'), delay(3000);
     await expect(page.getByText('1 search result')).toBeVisible();
     await homePage.patientSearchBar().clear(), delay(1000);
-    await homePage.patientSearchBar().fill('Susan Lopez'), delay(3000);
+    await homePage.patientSearchBar().fill('Devan Modi'), delay(3000);
     await expect(page.getByText('1 search result')).toBeVisible();
     await homePage.patientSearchBar().clear(), delay(1000);
-    await homePage.patientSearchBar().fill('Susan Hall'), delay(3000);
+    await homePage.patientSearchBar().fill('Florencia Klinger'), delay(3000);
     await expect(page.getByText('1 search result')).toBeVisible();
     await homePage.patientSearchBar().clear(), delay(1000);
-    await homePage.patientSearchBar().fill('Donna Roberts'), delay(3000);
+    await homePage.patientSearchBar().fill('Leon Wagner'), delay(3000);
     await expect(page.getByText('1 search result')).toBeVisible();
     await homePage.patientSearchBar().clear(), delay(1000);
-    await homePage.patientSearchBar().fill('Daniel Scott'), delay(3000);
+    await homePage.patientSearchBar().fill('Daichi Okada'), delay(3000);
     await expect(page.getByText('1 search result')).toBeVisible();
     await homePage.patientSearchBar().clear(), delay(1000);
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runDemoPatientsTest
-    }
-];
-
-

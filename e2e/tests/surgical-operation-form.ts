@@ -1,5 +1,4 @@
 import {expect, Page} from '@playwright/test';
-import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 import {VisitsPage} from '../utils/pages/visits-page';
@@ -12,7 +11,6 @@ import {
     updatedPostOperativeInstructions,
     updatedSpecimens
 } from '../utils/pages/clinical-forms-page';
-import {runAddSoapNoteTest, runDeleteSoapNoteTest, runEditSoapNoteTest} from "./soap-note-form.spec";
 import {cleanup} from "./utils";
 
 let homePage: HomePage;
@@ -34,6 +32,7 @@ async function setup(page: Page) {
 
 // Add surgical operation instructions
 export async function runAddSurgicalOperationInstructionTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -72,6 +71,7 @@ export async function runAddSurgicalOperationInstructionTest(page: Page) {
 
 // Edit surgical operation instructions
 export async function runEditSurgicalOperationInstructionTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -137,6 +137,7 @@ export async function runEditSurgicalOperationInstructionTest(page: Page) {
 
 // Delete surgical operation instructions
 export async function runDeleteSurgicalOperationInstructionTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -184,6 +185,7 @@ export async function runDeleteSurgicalOperationInstructionTest(page: Page) {
 
 // Estimated blood loss field should allow valid input
 export async function runEstimateBloodLossFieldFieldValidationTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -216,31 +218,3 @@ export async function runEstimateBloodLossFieldFieldValidationTest(page: Page) {
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runAddSurgicalOperationInstructionTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runEditSurgicalOperationInstructionTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runDeleteSurgicalOperationInstructionTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runEstimateBloodLossFieldFieldValidationTest
-    }
-];

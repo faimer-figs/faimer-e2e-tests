@@ -1,5 +1,4 @@
 import {expect, Page} from '@playwright/test';
-import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 import {VisitsPage} from '../utils/pages/visits-page';
@@ -16,11 +15,6 @@ import {
     updatedDischargeMedications,
     updatedHospitalCourse
 } from '../utils/pages/clinical-forms-page';
-import {
-    runAddDischargeInstructionsTest,
-    runDeleteDischargeInstructionsTest,
-    runEditDischargeInstructionsTest
-} from "./discharge-instructions-form.spec";
 import {cleanup} from "./utils";
 
 let homePage: HomePage;
@@ -43,6 +37,7 @@ async function setup(page: Page) {
 
 // Add discharge summary
 export async function runAddDischargeSummaryTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -79,6 +74,7 @@ export async function runAddDischargeSummaryTest(page: Page) {
 
 // Edit discharge summary
 export async function runEditDischargeSummaryTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -140,6 +136,7 @@ export async function runEditDischargeSummaryTest(page: Page) {
 
 // Delete discharge summary
 export async function runDeleteDischargeSummaryTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -180,29 +177,3 @@ export async function runDeleteDischargeSummaryTest(page: Page) {
 
     await cleanup(page);
 }
-
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runAddDischargeSummaryTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runEditDischargeSummaryTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runDeleteDischargeSummaryTest
-    }
-];
-

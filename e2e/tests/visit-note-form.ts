@@ -1,4 +1,4 @@
-import {test, expect, Page, Browser} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 import {VisitsPage} from '../utils/pages/visits-page';
@@ -7,7 +7,6 @@ import {
     updatedVisitNote,
     visitNote
 } from '../utils/pages/clinical-forms-page';
-import {runUserCreationAndFilteringTest} from "./users.spec";
 import {cleanup} from "./utils";
 
 let homePage: HomePage;
@@ -29,6 +28,7 @@ async function setup(page: Page) {
 
 // Add visit note
 export async function runAddVisitNoteTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -56,6 +56,7 @@ export async function runAddVisitNoteTest(page: Page) {
 
 // Edit visit note
 export async function runEditVisitNoteTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -93,6 +94,7 @@ export async function runEditVisitNoteTest(page: Page) {
 
 // Delete visit note
 export async function runDeleteVisitNoteTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -128,27 +130,3 @@ export async function runDeleteVisitNoteTest(page: Page) {
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runAddVisitNoteTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runEditVisitNoteTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runDeleteVisitNoteTest
-    }
-];

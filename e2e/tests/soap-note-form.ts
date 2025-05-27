@@ -1,5 +1,4 @@
 import {expect, Page} from '@playwright/test';
-import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 import {VisitsPage} from '../utils/pages/visits-page';
@@ -14,8 +13,6 @@ import {
     updatedPlan,
     updatedSubjectiveFindings
 } from '../utils/pages/clinical-forms-page';
-import {btoa} from "node:buffer";
-import {runSamplePatientsCreatedUponFirstLoginTest} from "./sample-patients.spec";
 import {cleanup} from "./utils";
 
 let homePage: HomePage;
@@ -37,6 +34,7 @@ async function setup(page: Page) {
 
 // Add soap note
 export async function runAddSoapNoteTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -69,6 +67,7 @@ export async function runAddSoapNoteTest(page: Page) {
 
 // Edit soap note
 export async function runEditSoapNoteTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -118,6 +117,7 @@ export async function runEditSoapNoteTest(page: Page) {
 
 // Delete soap note
 export async function runDeleteSoapNoteTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -155,27 +155,3 @@ export async function runDeleteSoapNoteTest(page: Page) {
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runAddSoapNoteTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runEditSoapNoteTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runDeleteSoapNoteTest
-    }
-];

@@ -1,5 +1,4 @@
 import {expect, Page} from '@playwright/test';
-import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 import {
@@ -9,9 +8,6 @@ import {
     patientListDescription,
     patientListName,
 } from '../utils/pages/patient-lists-page';
-import {VisitsPage} from "../utils/pages/visits-page";
-import {ChartPage} from "../utils/pages/chart-page";
-import {runOrderBasketLoadAllOrderablesTest} from "./order-basket.spec";
 import {cleanup} from "./utils";
 
 let homePage: HomePage;
@@ -31,6 +27,7 @@ async function setup(page: Page) {
 
 // Create a patient list
 export async function runCreatePatientListTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -54,6 +51,7 @@ export async function runCreatePatientListTest(page: Page) {
 
 // Edit a patient list
 export async function runEditPatientListTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -82,6 +80,7 @@ export async function runEditPatientListTest(page: Page) {
 
 // Delete a patient list
 export async function runDeletePatientListTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -108,6 +107,7 @@ export async function runDeletePatientListTest(page: Page) {
 
 // Manage patients in a list
 export async function runManagePatientListTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -147,6 +147,7 @@ export async function runManagePatientListTest(page: Page) {
 
 // Patient list created by one user should not be visible to another user
 export async function runPatientListVisibilityCheckTest(page: Page) {
+
     await setup(page);
 
     // setup
@@ -175,35 +176,3 @@ export async function runPatientListVisibilityCheckTest(page: Page) {
 
     await cleanup(page);
 }
-
-export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
-    engines: {
-        playwright: {
-            timeout: 60000
-        }
-    }
-};
-
-export const scenarios = [
-    {
-        engine: 'playwright',
-        testFunction: runCreatePatientListTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runEditPatientListTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runDeletePatientListTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runManagePatientListTest
-    },
-    {
-        engine: 'playwright',
-        testFunction: runPatientListVisibilityCheckTest
-    }
-];
