@@ -52,16 +52,17 @@ import {
     runDeleteWardAdmissionRequestTest,
     runEditWardAdmissionRequestTest
 } from "./ward-admission-form";
+import {O3_URL} from "../utils/configs/globalSetup";
 
 export const config = {
-    target: 'https://oz-faimer-dev.mekomsolutions.net',
+    target: `${O3_URL}`,
     engines: {
         playwright: {
             launchOptions: {
                 headless: true,
             },
-            // Aggregated metrics for Playwright
-            aggregateByName: true
+            aggregateByName: true,
+            extendedMetrics: true
         }
     },
 };
