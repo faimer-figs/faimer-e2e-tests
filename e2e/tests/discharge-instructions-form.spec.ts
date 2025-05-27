@@ -14,7 +14,6 @@ import {
     updatedFollowUpAppointment,
     updatedReasonsToContactDoctor
 } from '../utils/pages/clinical-forms-page';
-import {runDemoPatientsTest} from "./demo-patients.spec";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
