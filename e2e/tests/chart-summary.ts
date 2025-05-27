@@ -18,7 +18,7 @@ async function setup(page: Page) {
 
 // Patient summary to load all the apps
 export async function runPatientSummaryTest(page: Page) {
-
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup

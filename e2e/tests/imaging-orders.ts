@@ -29,6 +29,7 @@ async function setup(page: Page) {
 // Add an imaging order
 export async function runAddImagingOrderTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -59,6 +60,7 @@ export async function runAddImagingOrderTest(page: Page) {
 // Modify an imaging order
 export async function runModifyImagingOrderTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -95,6 +97,7 @@ export async function runModifyImagingOrderTest(page: Page) {
 // Discontinue an imaging order
 export async function runDiscontinueImagingOrderTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup

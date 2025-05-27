@@ -29,6 +29,7 @@ async function setup(page: Page) {
 // Add a drug order
 export async function runAddDrugOrderTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -64,6 +65,7 @@ export async function runAddDrugOrderTest(page: Page) {
 // Modify a drug order
 export async function runModifyDrugOrderTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -105,6 +107,7 @@ export async function runModifyDrugOrderTest(page: Page) {
 // Discontinue a drug order
 export async function runDiscontinueDrugOrderTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -141,6 +144,7 @@ export async function runDiscontinueDrugOrderTest(page: Page) {
 // Add a drug order with free text dosage
 export async function runAddDrugOrderWithFreeTextDosageTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup

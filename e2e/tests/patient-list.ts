@@ -28,6 +28,7 @@ async function setup(page: Page) {
 // Create a patient list
 export async function runCreatePatientListTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -52,6 +53,7 @@ export async function runCreatePatientListTest(page: Page) {
 // Edit a patient list
 export async function runEditPatientListTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -81,6 +83,7 @@ export async function runEditPatientListTest(page: Page) {
 // Delete a patient list
 export async function runDeletePatientListTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -108,6 +111,7 @@ export async function runDeletePatientListTest(page: Page) {
 // Manage patients in a list
 export async function runManagePatientListTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -148,6 +152,7 @@ export async function runManagePatientListTest(page: Page) {
 // Patient list created by one user should not be visible to another user
 export async function runPatientListVisibilityCheckTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup

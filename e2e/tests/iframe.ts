@@ -20,6 +20,7 @@ async function setup(page: Page) {
 // Render server in an iframe after login, with all core features available
 export async function runRenderIframeTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup

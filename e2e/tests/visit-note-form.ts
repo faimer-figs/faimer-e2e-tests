@@ -29,6 +29,7 @@ async function setup(page: Page) {
 // Add visit note
 export async function runAddVisitNoteTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -57,6 +58,7 @@ export async function runAddVisitNoteTest(page: Page) {
 // Edit visit note
 export async function runEditVisitNoteTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -95,6 +97,7 @@ export async function runEditVisitNoteTest(page: Page) {
 // Delete visit note
 export async function runDeleteVisitNoteTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup

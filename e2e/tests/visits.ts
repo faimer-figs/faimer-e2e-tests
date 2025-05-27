@@ -22,6 +22,7 @@ async function setup(page: Page) {
 // Start patient visit
 export async function runStartPatientVisitTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -46,6 +47,7 @@ export async function runStartPatientVisitTest(page: Page) {
 // Edit patient visit
 export async function runEditPatientVisitTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -73,6 +75,7 @@ export async function runEditPatientVisitTest(page: Page) {
 // End patient visit
 export async function runEndPatientVisitTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup

@@ -15,6 +15,7 @@ async function setup(page: Page) {
 // User creation and data filtering
 export async function runUserCreationAndFilteringTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup

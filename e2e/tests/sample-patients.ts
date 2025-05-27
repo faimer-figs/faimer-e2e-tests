@@ -19,6 +19,7 @@ async function setup(page: Page) {
 // Sample patients should be created upon the first user login
 export async function runSamplePatientsCreatedUponFirstLoginTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup

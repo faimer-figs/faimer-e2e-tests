@@ -19,6 +19,7 @@ async function setup(page: Page) {
 //Demo patients should be present and accessible through patient search
 export async function runDemoPatientsTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup

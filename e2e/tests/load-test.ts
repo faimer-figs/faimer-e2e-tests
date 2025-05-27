@@ -56,10 +56,20 @@ import {O3_URL} from "../utils/configs/globalSetup";
 
 export const config = {
     target: `${O3_URL}`,
+    phases: [{
+        duration: 60,
+        arrivalRate: 1,
+        arrivalCount: 5,
+    }],
     engines: {
         playwright: {
             launchOptions: {
                 headless: true,
+                viewport: {
+                    width: 1920,
+                    height: 1080
+                },
+                args: ['--start-fullscreen', '--start-maximized']
             },
             aggregateByName: true,
             extendedMetrics: true

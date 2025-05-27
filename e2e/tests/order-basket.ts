@@ -25,6 +25,7 @@ async function setup(page: Page) {
 // Order basket should load all the orderables
 export async function runOrderBasketLoadAllOrderablesTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup

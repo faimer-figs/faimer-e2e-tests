@@ -36,6 +36,7 @@ async function setup(page: Page) {
 // Add discharge instructions
 export async function runAddDischargeInstructionsTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -69,6 +70,7 @@ export async function runAddDischargeInstructionsTest(page: Page) {
 // Edit discharge instructions
 export async function runEditDischargeInstructionsTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -120,6 +122,7 @@ export async function runEditDischargeInstructionsTest(page: Page) {
 // Delete discharge instructions
 export async function runDeleteDischargeInstructionsTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup

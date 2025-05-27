@@ -35,6 +35,7 @@ async function setup(page: Page) {
 // Add soap note
 export async function runAddSoapNoteTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -68,6 +69,7 @@ export async function runAddSoapNoteTest(page: Page) {
 // Edit soap note
 export async function runEditSoapNoteTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
@@ -118,6 +120,7 @@ export async function runEditSoapNoteTest(page: Page) {
 // Delete soap note
 export async function runDeleteSoapNoteTest(page: Page) {
 
+    await page.setViewportSize({width: 1920, height: 1080});
     await setup(page);
 
     // setup
