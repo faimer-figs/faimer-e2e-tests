@@ -25,7 +25,7 @@ test.beforeEach(async ({ page }) => {
   await keycloak.createUser();
 });
 
-test('Create a patient list', async ({ }) => {
+test('Create a patient list.', async ({ }) => {
   // setup
   await homePage.navigateToLoginPage();
   await homePage.loginWithUser();
