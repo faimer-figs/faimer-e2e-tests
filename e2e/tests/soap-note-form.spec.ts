@@ -1,4 +1,4 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
@@ -16,6 +16,7 @@ import {
 } from '../utils/pages/clinical-forms-page';
 import {btoa} from "node:buffer";
 import {runSamplePatientsCreatedUponFirstLoginTest} from "./sample-patients.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -35,7 +36,7 @@ async function setup(page: Page) {
 }
 
 // Add soap note
-export async function runAddSoapNoteTest(page: Page, browser: Browser) {
+export async function runAddSoapNoteTest(page: Page) {
     await setup(page);
 
     // setup
@@ -62,12 +63,12 @@ export async function runAddSoapNoteTest(page: Page, browser: Browser) {
     await expect(page.locator('//span[normalize-space()="Assessment"]/following-sibling::span[1]')).toHaveText(`${assessment}`);
     await expect(page.locator('//span[normalize-space()="Plan"]/following-sibling::span[1]')).toHaveText(`${plan}`);
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 
 // Edit soap note
-export async function runEditSoapNoteTest(page: Page, browser: Browser) {
+export async function runEditSoapNoteTest(page: Page) {
     await setup(page);
 
     // setup
@@ -111,12 +112,12 @@ export async function runEditSoapNoteTest(page: Page, browser: Browser) {
     await expect(page.locator('//span[normalize-space()="Plan"]/following-sibling::span[1]')).not.toHaveText(`${plan}`);
     await expect(page.locator('//span[normalize-space()="Plan"]/following-sibling::span[1]')).toHaveText(`${updatedPlan}`);
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 
 // Delete soap note
-export async function runDeleteSoapNoteTest(page: Page, browser: Browser) {
+export async function runDeleteSoapNoteTest(page: Page) {
     await setup(page);
 
     // setup
@@ -152,15 +153,7 @@ export async function runDeleteSoapNoteTest(page: Page, browser: Browser) {
     await formsPage.navigateToEncounterPage();
     await expect(page.getByText(/There are no encounters to display for this patient/).nth(0)).toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

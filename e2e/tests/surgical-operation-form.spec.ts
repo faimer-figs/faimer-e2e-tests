@@ -1,4 +1,4 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
@@ -13,6 +13,7 @@ import {
     updatedSpecimens
 } from '../utils/pages/clinical-forms-page';
 import {runAddSoapNoteTest, runDeleteSoapNoteTest, runEditSoapNoteTest} from "./soap-note-form.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -32,7 +33,7 @@ async function setup(page: Page) {
 }
 
 // Add surgical operation instructions
-export async function runAddSurgicalOperationInstructionTest(page: Page, browser: Browser) {
+export async function runAddSurgicalOperationInstructionTest(page: Page) {
     await setup(page);
 
     // setup
@@ -66,11 +67,11 @@ export async function runAddSurgicalOperationInstructionTest(page: Page, browser
     await expect(page.locator('//span[normalize-space()="Anesthesia Type"]/following-sibling::span[1]')).toHaveText(/general/i);
     await expect(page.locator('//span[normalize-space()="Post-Operative Instructions"]/following-sibling::span[1]')).toHaveText(`${postOperativeInstructions}`);
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Edit surgical operation instructions
-export async function runEditSurgicalOperationInstructionTest(page: Page, browser: Browser) {
+export async function runEditSurgicalOperationInstructionTest(page: Page) {
     await setup(page);
 
     // setup
@@ -131,11 +132,11 @@ export async function runEditSurgicalOperationInstructionTest(page: Page, browse
     await expect(page.locator('//span[normalize-space()="Post-Operative Instructions"]/following-sibling::span[1]')).not.toHaveText(`${postOperativeInstructions}`);
     await expect(page.locator('//span[normalize-space()="Post-Operative Instructions"]/following-sibling::span[1]')).toHaveText(`${updatedPostOperativeInstructions}`);
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Delete surgical operation instructions
-export async function runDeleteSurgicalOperationInstructionTest(page: Page, browser: Browser) {
+export async function runDeleteSurgicalOperationInstructionTest(page: Page) {
     await setup(page);
 
     // setup
@@ -178,11 +179,11 @@ export async function runDeleteSurgicalOperationInstructionTest(page: Page, brow
     await formsPage.navigateToEncounterPage();
     await expect(page.getByText(/There are no encounters to display for this patient/).nth(0)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Estimated blood loss field should allow valid input
-export async function runEstimateBloodLossFieldFieldValidationTest(page: Page, browser: Browser) {
+export async function runEstimateBloodLossFieldFieldValidationTest(page: Page) {
     await setup(page);
 
     // setup
@@ -213,15 +214,7 @@ export async function runEstimateBloodLossFieldFieldValidationTest(page: Page, b
     await page.getByRole('button', {name: /expand current row/i}).click();
     await expect(page.locator('//div[span[1][normalize-space()="Estimated Blood Loss"]]/span[2]')).toHaveText('1.0');
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

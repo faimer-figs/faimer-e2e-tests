@@ -1,9 +1,10 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 import {VisitsPage} from '../utils/pages/visits-page';
 import {runAddVisitNoteTest, runDeleteVisitNoteTest, runEditVisitNoteTest} from "./visit-note-form.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -21,7 +22,7 @@ async function setup(page: Page) {
 }
 
 // Start patient visit
-export async function runStartPatientVisitTest(page: Page, browser: Browser) {
+export async function runStartPatientVisitTest(page: Page) {
     await setup(page);
 
     // setup
@@ -40,11 +41,11 @@ export async function runStartPatientVisitTest(page: Page, browser: Browser) {
     await expect(page.getByRole('heading', {name: 'Facility Visit'}).nth(0)).toBeVisible();
     await expect(page.locator('span[title="Active Visit"]').getByText(/active visit/i)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Edit patient visit
-export async function runEditPatientVisitTest(page: Page, browser: Browser) {
+export async function runEditPatientVisitTest(page: Page) {
     await setup(page);
 
     // setup
@@ -66,11 +67,11 @@ export async function runEditPatientVisitTest(page: Page, browser: Browser) {
     await expect(page.getByRole('heading', {name: 'Home Visit'}).nth(0)).toBeVisible();
     await expect(page.locator('span[title="Active Visit"]').getByText(/active visit/i)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // End patient visit
-export async function runEndPatientVisitTest(page: Page, browser: Browser) {
+export async function runEndPatientVisitTest(page: Page) {
     await setup(page);
 
     // setup
@@ -91,15 +92,7 @@ export async function runEndPatientVisitTest(page: Page, browser: Browser) {
     // verify
     await expect(page.getByText(/active visit/i)).not.toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

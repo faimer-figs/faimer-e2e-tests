@@ -8,6 +8,7 @@ import {
     visitNote
 } from '../utils/pages/clinical-forms-page';
 import {runUserCreationAndFilteringTest} from "./users.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -27,7 +28,7 @@ async function setup(page: Page) {
 }
 
 // Add visit note
-export async function runAddVisitNoteTest(page: Page, browser: Browser) {
+export async function runAddVisitNoteTest(page: Page) {
     await setup(page);
 
     // setup
@@ -50,11 +51,11 @@ export async function runAddVisitNoteTest(page: Page, browser: Browser) {
     await formsPage.navigateToNotesPage(), delay(2000);
     await expect(page.getByText(visitNote)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Edit visit note
-export async function runEditVisitNoteTest(page: Page, browser: Browser) {
+export async function runEditVisitNoteTest(page: Page) {
     await setup(page);
 
     // setup
@@ -87,11 +88,11 @@ export async function runEditVisitNoteTest(page: Page, browser: Browser) {
     await expect(page.getByText(visitNote)).not.toBeVisible();
     await expect(page.getByText(updatedVisitNote)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Delete visit note
-export async function runDeleteVisitNoteTest(page: Page, browser: Browser) {
+export async function runDeleteVisitNoteTest(page: Page) {
     await setup(page);
 
     // setup
@@ -125,15 +126,7 @@ export async function runDeleteVisitNoteTest(page: Page, browser: Browser) {
     await formsPage.navigateToNotesPage(), delay(2000);
     await expect(page.getByText(/there are no notes to display for this patient/i).nth(0)).toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

@@ -1,4 +1,4 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
@@ -6,6 +6,7 @@ import {VisitsPage} from '../utils/pages/visits-page';
 import {ChartPage} from '../utils/pages/chart-page';
 import {OrdersPage} from '../utils/pages/orders-page';
 import {runAddImagingOrderTest, runDiscontinueImagingOrderTest, runModifyImagingOrderTest} from "./imaging-orders.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -27,7 +28,7 @@ async function setup(page: Page) {
 }
 
 // Add a lab test
-export async function runAddLabOrderTest(page: Page, browser: Browser) {
+export async function runAddLabOrderTest(page: Page) {
     await setup(page);
 
     // setup
@@ -52,11 +53,11 @@ export async function runAddLabOrderTest(page: Page, browser: Browser) {
     await expect(page.locator("//tr[td[text()='Test order'] and td[text()='Bacteriuria test, urine']]")).toBeVisible();
     await expect(page.locator("//tr[td[text()='Test order'] and td[text()='Bacteriuria test, urine']]//div[@data-priority='routine']")).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Modify a lab order
-export async function runModifyLabOrderTest(page: Page, browser: Browser) {
+export async function runModifyLabOrderTest(page: Page) {
     await setup(page);
 
     // setup
@@ -87,11 +88,11 @@ export async function runModifyLabOrderTest(page: Page, browser: Browser) {
     await expect(page.locator("//tr[td[text()='Test order'] and td[text()='Blood urea nitrogen']]//div[@data-priority='routine']")).not.toBeVisible();
     await expect(page.locator("//tr[td[text()='Test order'] and td[text()='Blood urea nitrogen']]//div[@data-priority='stat']")).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Discontinue a lab order
-export async function runDiscontinueLabOrderTest(page: Page, browser: Browser) {
+export async function runDiscontinueLabOrderTest(page: Page) {
     await setup(page);
 
     // setup
@@ -119,15 +120,7 @@ export async function runDiscontinueLabOrderTest(page: Page, browser: Browser) {
     await expect(page.locator("//tr[td[text()='Test order'] and td[text()='Complete blood count']]")).not.toBeVisible();
     await expect(page.locator("//tr[td[text()='Test order'] and td[text()='Complete blood count']]//div[@data-priority='routine']")).not.toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

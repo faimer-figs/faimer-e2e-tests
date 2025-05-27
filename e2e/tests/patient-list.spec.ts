@@ -1,4 +1,4 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
@@ -12,6 +12,7 @@ import {
 import {VisitsPage} from "../utils/pages/visits-page";
 import {ChartPage} from "../utils/pages/chart-page";
 import {runOrderBasketLoadAllOrderablesTest} from "./order-basket.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -29,7 +30,7 @@ async function setup(page: Page) {
 }
 
 // Create a patient list
-export async function runCreatePatientListTest(page: Page, browser: Browser) {
+export async function runCreatePatientListTest(page: Page) {
     await setup(page);
 
     // setup
@@ -48,11 +49,11 @@ export async function runCreatePatientListTest(page: Page, browser: Browser) {
     await expect(patientListPage.patientListHeader()).toHaveText(new RegExp(patientListDescription));
     await expect(patientListPage.patientListHeader()).toHaveText(/0 patients/);
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Edit a patient list
-export async function runEditPatientListTest(page: Page, browser: Browser) {
+export async function runEditPatientListTest(page: Page) {
     await setup(page);
 
     // setup
@@ -76,11 +77,11 @@ export async function runEditPatientListTest(page: Page, browser: Browser) {
     await expect(patientListPage.patientListHeader()).not.toHaveText(new RegExp(patientListDescription));
     await expect(patientListPage.patientListHeader()).toHaveText(new RegExp(editedPatientListDescription));
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Delete a patient list
-export async function runDeletePatientListTest(page: Page, browser: Browser) {
+export async function runDeletePatientListTest(page: Page) {
     await setup(page);
 
     // setup
@@ -102,11 +103,11 @@ export async function runDeletePatientListTest(page: Page, browser: Browser) {
     await patientListPage.navigateToMyList();
     await expect(page.getByText(/there are no user-defined patient lists to display/i)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Manage patients in a list
-export async function runManagePatientListTest(page: Page, browser: Browser) {
+export async function runManagePatientListTest(page: Page) {
     await setup(page);
 
     // setup
@@ -141,11 +142,11 @@ export async function runManagePatientListTest(page: Page, browser: Browser) {
     await patientListPage.removePatientToList();
     await expect(page.getByText(/there are no patients in this list/i)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Patient list created by one user should not be visible to another user
-export async function runPatientListVisibilityCheckTest(page: Page, browser: Browser) {
+export async function runPatientListVisibilityCheckTest(page: Page) {
     await setup(page);
 
     // setup
@@ -172,15 +173,7 @@ export async function runPatientListVisibilityCheckTest(page: Page, browser: Bro
     await patientListPage.allListsButton().click();
     await expect(page.getByText(patientListName)).not.toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

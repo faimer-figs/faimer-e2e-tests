@@ -1,6 +1,7 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -16,7 +17,7 @@ async function setup(page: Page) {
 }
 
 //Demo patients should be present and accessible through patient search
-export async function runDemoPatientsTest(page: Page, browser: Browser) {
+export async function runDemoPatientsTest(page: Page) {
     await setup(page);
 
     // setup
@@ -43,15 +44,7 @@ export async function runDemoPatientsTest(page: Page, browser: Browser) {
     await expect(page.getByText('1 search result')).toBeVisible();
     await homePage.patientSearchBar().clear(), delay(1000);
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

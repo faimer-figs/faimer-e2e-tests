@@ -1,4 +1,4 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
@@ -6,6 +6,7 @@ import {
     runAddSurgicalOperationInstructionTest, runDeleteSurgicalOperationInstructionTest,
     runEditSurgicalOperationInstructionTest, runEstimateBloodLossFieldFieldValidationTest
 } from "./surgical-operation-form.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -16,7 +17,7 @@ async function setup(page: Page) {
 }
 
 // User creation and data filtering
-export async function runUserCreationAndFilteringTest(page: Page, browser: Browser) {
+export async function runUserCreationAndFilteringTest(page: Page) {
     await setup(page);
 
     // setup
@@ -101,15 +102,7 @@ export async function runUserCreationAndFilteringTest(page: Page, browser: Brows
     await homePage.patientSearchBar().clear(), delay(1000);
     await homePage.logout();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUsers();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

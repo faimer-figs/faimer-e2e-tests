@@ -1,4 +1,4 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
@@ -8,6 +8,7 @@ import {
     runEditPatientListTest,
     runManagePatientListTest, runPatientListVisibilityCheckTest
 } from "./patient-list.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -23,7 +24,7 @@ async function setup(page: Page) {
 }
 
 // Search patient by given name
-export async function runSearchPatientByGivenNameTest(page: Page, browser: Browser) {
+export async function runSearchPatientByGivenNameTest(page: Page) {
     await setup(page);
 
     // setup
@@ -41,11 +42,11 @@ export async function runSearchPatientByGivenNameTest(page: Page, browser: Brows
     await expect(patientBanner.getByText(`Daniel Acosta`)).toBeVisible();
     await expect(patientBanner.getByText(/01-Jan-1953/i)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Search patient by full name
-export async function runSearchPatientByFullNameTest(page: Page, browser: Browser) {
+export async function runSearchPatientByFullNameTest(page: Page) {
     await setup(page);
 
     // setup
@@ -63,11 +64,11 @@ export async function runSearchPatientByFullNameTest(page: Page, browser: Browse
     await expect(patientBanner.getByText(`Daichi Okada`)).toBeVisible();
     await expect(patientBanner.getByText(/01-Jan-1969/i)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Search patient by identifier
-export async function runSearchPatientByIdentifierTest(page: Page, browser: Browser) {
+export async function runSearchPatientByIdentifierTest(page: Page) {
     await setup(page);
 
     // setup
@@ -85,11 +86,11 @@ export async function runSearchPatientByIdentifierTest(page: Page, browser: Brow
     await expect(patientBanner.getByText(`Betty Williams`)).toBeVisible();
     await expect(patientBanner.getByText(/15-Mar-1973/i)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Search patient by postal code
-export async function runSearchPatientByPostalCodeTest(page: Page, browser: Browser) {
+export async function runSearchPatientByPostalCodeTest(page: Page) {
     await setup(page);
 
     // setup
@@ -113,11 +114,11 @@ export async function runSearchPatientByPostalCodeTest(page: Page, browser: Brow
     await page.getByRole('link', {name: 'Susan Harris'}).click();
     await expect(page.locator('header[aria-label="patient banner"]').getByText('Susan Harris')).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Search patient by age
-export async function runSearchPatientByAgeTest(page: Page, browser: Browser) {
+export async function runSearchPatientByAgeTest(page: Page) {
     await setup(page);
 
     // setup
@@ -142,11 +143,11 @@ export async function runSearchPatientByAgeTest(page: Page, browser: Browser) {
     await page.getByRole('link', {name: 'Susan Hall'}).click();
     await expect(page.locator('header[aria-label="patient banner"]').getByText('Susan Hall')).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Search patient by date of birth
-export async function runSearchPatientByDateOfBirthTest(page: Page, browser: Browser) {
+export async function runSearchPatientByDateOfBirthTest(page: Page) {
     await setup(page);
 
     // setup
@@ -173,15 +174,7 @@ export async function runSearchPatientByDateOfBirthTest(page: Page, browser: Bro
     await page.getByRole('link', {name: 'Susan Lopez'}).click();
     await expect(page.locator('header[aria-label="patient banner"]').getByText('Susan Lopez')).toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

@@ -1,4 +1,4 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
@@ -21,6 +21,7 @@ import {
     runSearchPatientByGivenNameTest,
     runSearchPatientByIdentifierTest, runSearchPatientByPostalCodeTest
 } from "./patient-search.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -41,7 +42,7 @@ async function setup(page: Page) {
 }
 
 // Add procedure note
-export async function runAddProcedureNoteTest(page: Page, browser: Browser) {
+export async function runAddProcedureNoteTest(page: Page) {
     await setup(page);
 
     // setup
@@ -72,12 +73,12 @@ export async function runAddProcedureNoteTest(page: Page, browser: Browser) {
     await expect(page.locator('//span[normalize-space()="Anesthesia Type"]/following-sibling::span[1]')).toHaveText(/local anesthesia and sedation/i);
     await expect(page.locator('//span[normalize-space()="Complications"]/following-sibling::span[1]')).toHaveText(`${complications}`);
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 
 // Edit procedure note
-export async function runEditProcedureNoteTest(page: Page, browser: Browser) {
+export async function runEditProcedureNoteTest(page: Page) {
     await setup(page);
 
     // setup
@@ -127,12 +128,12 @@ export async function runEditProcedureNoteTest(page: Page, browser: Browser) {
     await expect(page.locator('//span[normalize-space()="Complications"]/following-sibling::span[1]')).not.toHaveText(`${complications}`);
     await expect(page.locator('//span[normalize-space()="Complications"]/following-sibling::span[1]')).toHaveText(`${updatedComplications}`);
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 
 // Delete procedure note
-export async function runDeleteProcedureNoteTest(page: Page, browser: Browser) {
+export async function runDeleteProcedureNoteTest(page: Page) {
     await setup(page);
 
     // setup
@@ -172,15 +173,7 @@ export async function runDeleteProcedureNoteTest(page: Page, browser: Browser) {
     await formsPage.navigateToEncounterPage();
     await expect(page.getByText(/There are no encounters to display for this patient/).nth(0)).toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

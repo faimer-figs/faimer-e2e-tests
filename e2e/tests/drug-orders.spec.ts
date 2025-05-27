@@ -1,4 +1,4 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
@@ -11,6 +11,7 @@ import {
     runDeleteDischargeSummaryTest,
     runEditDischargeSummaryTest
 } from "./discharge-summary-form.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -33,7 +34,7 @@ async function setup(page: Page) {
 }
 
 // Add a drug order
-export async function runAddDrugOrderTest(page: Page, browser: Browser) {
+export async function runAddDrugOrderTest(page: Page) {
     await setup(page);
 
     // setup
@@ -62,12 +63,12 @@ export async function runAddDrugOrderTest(page: Page, browser: Browser) {
     await expect(page.getByText(/intravenous/i).nth(0)).toBeVisible();
     await expect(page.getByText(/indication hypertension/i).nth(0)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 
 // Modify a drug order
-export async function runModifyDrugOrderTest(page: Page, browser: Browser) {
+export async function runModifyDrugOrderTest(page: Page) {
     await setup(page);
 
     // setup
@@ -103,11 +104,11 @@ export async function runModifyDrugOrderTest(page: Page, browser: Browser) {
     await expect(page.getByText(/thrice daily/i).nth(0)).toBeVisible();
     await expect(page.getByText(/6 days/i).nth(0)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Discontinue a drug order
-export async function runDiscontinueDrugOrderTest(page: Page, browser: Browser) {
+export async function runDiscontinueDrugOrderTest(page: Page) {
     await setup(page);
 
     // setup
@@ -138,11 +139,11 @@ export async function runDiscontinueDrugOrderTest(page: Page, browser: Browser) 
     // verify
     await expect(page.locator('p', {hasText: 'Aspirin 325mg'})).toContainText('Discontinued');
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Add a drug order with free text dosage
-export async function runAddDrugOrderWithFreeTextDosageTest(page: Page, browser: Browser) {
+export async function runAddDrugOrderWithFreeTextDosageTest(page: Page) {
     await setup(page);
 
     // setup
@@ -176,15 +177,7 @@ export async function runAddDrugOrderWithFreeTextDosageTest(page: Page, browser:
     await expect(page.getByText(/2 tablets - every after eight hours - to be taken after a meal/i)).toBeVisible();
     await expect(page.getByText(/indication hypertension/i).nth(0)).toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

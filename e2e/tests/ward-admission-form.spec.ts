@@ -1,4 +1,4 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
@@ -13,6 +13,7 @@ import {
     updatedAttendingPhysician,
 } from '../utils/pages/clinical-forms-page';
 import {runEditPatientVisitTest, runEndPatientVisitTest, runStartPatientVisitTest} from "./visits.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -32,7 +33,7 @@ async function setup(page: Page) {
 }
 
 // Add ward admission request
-export async function runAddWardAdmissionRequestTest(page: Page, browser: Browser) {
+export async function runAddWardAdmissionRequestTest(page: Page) {
     await setup(page);
 
     // setup
@@ -66,11 +67,11 @@ export async function runAddWardAdmissionRequestTest(page: Page, browser: Browse
     await expect(page.locator('//span[normalize-space()="Bed assignment"]/following-sibling::span[1]')).toHaveText(/medical surgical/i);
     await expect(page.locator('//span[normalize-space()="Consults"]/following-sibling::span[1]')).toHaveText(`${consults}`);
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Edit ward admission request
-export async function runEditWardAdmissionRequestTest(page: Page, browser: Browser) {
+export async function runEditWardAdmissionRequestTest(page: Page) {
     await setup(page);
 
     // setup
@@ -129,11 +130,11 @@ export async function runEditWardAdmissionRequestTest(page: Page, browser: Brows
     await expect(page.locator('//span[normalize-space()="Activity"]/following-sibling::span[1]')).toHaveText(/strict bedrest/i);
     await expect(page.locator('//span[normalize-space()="Diet"]/following-sibling::span[1]')).toHaveText(/regular diet/i);
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Delete ward admission request
-export async function runDeleteWardAdmissionRequestTest(page: Page, browser: Browser) {
+export async function runDeleteWardAdmissionRequestTest(page: Page) {
     await setup(page);
 
     // setup
@@ -176,11 +177,11 @@ export async function runDeleteWardAdmissionRequestTest(page: Page, browser: Bro
     await formsPage.navigateToEncounterPage();
     await expect(page.getByText(/There are no encounters to display for this patient/).nth(0)).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Creating ward admission request should create admission request in the respective location
-export async function runCreateWardAdmissionRequestTest(page: Page, browser: Browser) {
+export async function runCreateWardAdmissionRequestTest(page: Page) {
     await setup(page);
 
     // setup
@@ -205,15 +206,7 @@ export async function runCreateWardAdmissionRequestTest(page: Page, browser: Bro
     await expect(page.getByText(/admission requests/i)).toBeVisible();
     await expect(page.getByText('Florencia Klinger')).toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

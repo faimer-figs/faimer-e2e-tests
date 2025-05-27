@@ -1,4 +1,4 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
@@ -21,6 +21,7 @@ import {
     runDeleteDischargeInstructionsTest,
     runEditDischargeInstructionsTest
 } from "./discharge-instructions-form.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -41,7 +42,7 @@ async function setup(page: Page) {
 }
 
 // Add discharge summary
-export async function runAddDischargeSummaryTest(page: Page, browser: Browser) {
+export async function runAddDischargeSummaryTest(page: Page) {
     await setup(page);
 
     // setup
@@ -73,11 +74,11 @@ export async function runAddDischargeSummaryTest(page: Page, browser: Browser) {
     await expect(page.locator('//span[normalize-space()="Admission Date"]/following-sibling::span[1]')).toHaveText(/2025-04-23/i);
     await expect(page.locator('//span[normalize-space()="Discharge Date"]/following-sibling::span[1]')).toHaveText(/2025-04-24/i);
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Edit discharge summary
-export async function runEditDischargeSummaryTest(page: Page, browser: Browser) {
+export async function runEditDischargeSummaryTest(page: Page) {
     await setup(page);
 
     // setup
@@ -134,11 +135,11 @@ export async function runEditDischargeSummaryTest(page: Page, browser: Browser) 
     await expect(page.locator('//span[normalize-space()="Discharge Date"]/following-sibling::span[1]')).not.toHaveText(/2025-04-24/i);
     await expect(page.locator('//span[normalize-space()="Discharge Date"]/following-sibling::span[1]')).toHaveText(/2025-04-21/i);
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Delete discharge summary
-export async function runDeleteDischargeSummaryTest(page: Page, browser: Browser) {
+export async function runDeleteDischargeSummaryTest(page: Page) {
     await setup(page);
 
     // setup
@@ -177,15 +178,7 @@ export async function runDeleteDischargeSummaryTest(page: Page, browser: Browser
     await formsPage.navigateToEncounterPage();
     await expect(page.getByText(/There are no encounters to display for this patient/).nth(0)).toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 

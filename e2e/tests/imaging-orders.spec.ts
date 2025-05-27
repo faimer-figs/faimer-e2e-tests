@@ -1,4 +1,4 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
@@ -6,6 +6,7 @@ import {VisitsPage} from '../utils/pages/visits-page';
 import {ChartPage} from '../utils/pages/chart-page';
 import {OrdersPage} from '../utils/pages/orders-page';
 import {runRenderIframeTest} from "./iframe.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -28,7 +29,7 @@ async function setup(page: Page) {
 }
 
 // Add an imaging order
-export async function runAddImagingOrderTest(page: Page, browser: Browser) {
+export async function runAddImagingOrderTest(page: Page) {
     await setup(page);
 
     // setup
@@ -53,11 +54,11 @@ export async function runAddImagingOrderTest(page: Page, browser: Browser) {
     await expect(page.locator("//tr[td[text()='Imaging orders'] and td[text()='CT cervical spine']]")).toBeVisible();
     await expect(page.locator("//tr[td[text()='Imaging orders'] and td[text()='CT cervical spine']]//div[@data-priority='routine']")).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Modify an imaging order
-export async function runModifyImagingOrderTest(page: Page, browser: Browser) {
+export async function runModifyImagingOrderTest(page: Page) {
     await setup(page);
 
     // setup
@@ -88,11 +89,11 @@ export async function runModifyImagingOrderTest(page: Page, browser: Browser) {
     await expect(page.locator("//tr[td[text()='Imaging orders'] and td[text()='X Ray soft tissue neck']]//div[@data-priority='routine']")).not.toBeVisible();
     await expect(page.locator("//tr[td[text()='Imaging orders'] and td[text()='X Ray soft tissue neck']]//div[@data-priority='stat']")).toBeVisible();
 
-    await cleanup(browser);
+    await cleanup(page);
 }
 
 // Discontinue an imaging order
-export async function runDiscontinueImagingOrderTest(page: Page, browser: Browser) {
+export async function runDiscontinueImagingOrderTest(page: Page) {
     await setup(page);
 
     // setup
@@ -120,15 +121,7 @@ export async function runDiscontinueImagingOrderTest(page: Page, browser: Browse
     await expect(page.locator("//tr[td[text()='Imaging orders'] and td[text()='MRI brain (with contrast)']]")).not.toBeVisible();
     await expect(page.locator("//tr[td[text()='Imaging orders'] and td[text()='MRI brain (with contrast)']]//div[@data-priority='routine']")).not.toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

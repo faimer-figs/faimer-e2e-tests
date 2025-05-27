@@ -1,14 +1,8 @@
-import {Browser, expect, Page} from '@playwright/test';
-import {test} from '../utils/configs/globalSetup';
+import {expect, Page} from '@playwright/test';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {EditPage} from '../utils/pages/edit-page';
 import {Keycloak} from '../utils/pages/keycloak';
-import {
-    runAddDrugOrderTest,
-    runAddDrugOrderWithFreeTextDosageTest,
-    runDiscontinueDrugOrderTest,
-    runModifyDrugOrderTest
-} from "./drug-orders.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -27,7 +21,7 @@ async function setup(page: Page) {
 }
 
 // Edit patient details
-export async function runEditPatientDetailsTest(page: Page, browser: Browser) {
+export async function runEditPatientDetailsTest(page: Page) {
     await setup(page);
 
     // setup
@@ -57,15 +51,7 @@ export async function runEditPatientDetailsTest(page: Page, browser: Browser) {
     await expect(patientBanner.getByText(/01-Jan-1953/i)).not.toBeVisible();
     await expect(patientBanner.getByText(/01-Jan-1952/i)).toBeVisible();
 
-    await cleanup(browser)
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page)
 }
 
 

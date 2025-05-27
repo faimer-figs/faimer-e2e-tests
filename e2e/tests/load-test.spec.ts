@@ -1,3 +1,4 @@
+import {Page} from 'playwright';
 import {runPatientSummaryTest} from "./chart-summary.spec";
 import {runDemoPatientsTest} from "./demo-patients.spec";
 import {
@@ -54,6 +55,18 @@ import {
 } from "./ward-admission-form.spec";
 
 
+type TestFunction = (page: Page) => Promise<void>;
+
+function withTimeouts(
+    testFunction: TestFunction): TestFunction {
+    return async (page: Page) => {
+        page.setDefaultTimeout(60000);
+        page.setDefaultNavigationTimeout(60000);
+
+        await testFunction(page);
+    };
+}
+
 export const config = {
     target: 'https://oz-faimer-dev.mekomsolutions.net',
     engines: {
@@ -72,231 +85,288 @@ export const config = {
 export const scenarios = [
     {
         engine: 'playwright',
-        testFunction: runPatientSummaryTest
+        name: 'Patient summary to load all the apps',
+        testFunction: withTimeouts(runPatientSummaryTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDemoPatientsTest
+        name: 'Demo patients should be present and accessible through patient search',
+        testFunction: withTimeouts(runDemoPatientsTest)
     },
     {
         engine: 'playwright',
-        testFunction: runAddDischargeInstructionsTest
+        name: 'Add discharge instructions',
+        testFunction: withTimeouts(runAddDischargeInstructionsTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEditDischargeInstructionsTest
+        name: 'Edit discharge instructions',
+        testFunction: withTimeouts(runEditDischargeInstructionsTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDeleteDischargeInstructionsTest
+        name: 'Delete discharge instructions',
+        testFunction: withTimeouts(runDeleteDischargeInstructionsTest)
     },
     {
         engine: 'playwright',
-        testFunction: runAddDischargeInstructionsTest
+        name: 'Add discharge instructions',
+        testFunction: withTimeouts(runAddDischargeInstructionsTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEditDischargeInstructionsTest
+        name: 'Edit discharge instructions',
+        testFunction: withTimeouts(runEditDischargeInstructionsTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDeleteDischargeInstructionsTest
+        name: 'Delete discharge instructions',
+        testFunction: withTimeouts(runDeleteDischargeInstructionsTest)
     },
     {
         engine: 'playwright',
-        testFunction: runAddDischargeSummaryTest
+        name: 'Add discharge summary',
+        testFunction: withTimeouts(runAddDischargeSummaryTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEditDischargeSummaryTest
+        name: 'Edit discharge summary',
+        testFunction: withTimeouts(runEditDischargeSummaryTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDeleteDischargeSummaryTest
+        name: 'Delete discharge summary',
+        testFunction: withTimeouts(runDeleteDischargeSummaryTest)
     },
     {
         engine: 'playwright',
-        testFunction: runAddDrugOrderTest
+        name: 'Add a drug order',
+        testFunction: withTimeouts(runAddDrugOrderTest)
     },
     {
         engine: 'playwright',
-        testFunction: runModifyDrugOrderTest
+        name: 'Modify a drug order',
+        testFunction: withTimeouts(runModifyDrugOrderTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDiscontinueDrugOrderTest
+        name: 'Discontinue a drug order',
+        testFunction: withTimeouts(runDiscontinueDrugOrderTest)
     },
     {
         engine: 'playwright',
-        testFunction: runAddDrugOrderWithFreeTextDosageTest
+        name: 'Add a drug order with free text dosage',
+        testFunction: withTimeouts(runAddDrugOrderWithFreeTextDosageTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEditPatientDetailsTest
+        name: 'Edit patient details',
+        testFunction: withTimeouts(runEditPatientDetailsTest)
     },
     {
         engine: 'playwright',
-        testFunction: runRenderIframeTest
+        name: 'Render server in an iframe after login, with all core features available',
+        testFunction: withTimeouts(runRenderIframeTest)
     },
     {
         engine: 'playwright',
-        testFunction: runAddImagingOrderTest
+        name: 'Add an imaging order',
+        testFunction: withTimeouts(runAddImagingOrderTest)
     },
     {
         engine: 'playwright',
-        testFunction: runModifyImagingOrderTest
+        name: 'Modify an imaging order',
+        testFunction: withTimeouts(runModifyImagingOrderTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDiscontinueImagingOrderTest
+        name: 'Discontinue an imaging order',
+        testFunction: withTimeouts(runDiscontinueImagingOrderTest)
     },
     {
         engine: 'playwright',
-        testFunction: runAddLabOrderTest
+        name: 'Add a lab test',
+        testFunction: withTimeouts(runAddLabOrderTest)
     },
     {
         engine: 'playwright',
-        testFunction: runModifyLabOrderTest
+        name: 'Modify a lab order',
+        testFunction: withTimeouts(runModifyLabOrderTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDiscontinueLabOrderTest
+        name: 'Discontinue a lab order',
+        testFunction: withTimeouts(runDiscontinueLabOrderTest)
     },
     {
         engine: 'playwright',
-        testFunction: runOrderBasketLoadAllOrderablesTest
+        name: 'Order basket should load all the orderables',
+        testFunction: withTimeouts(runOrderBasketLoadAllOrderablesTest)
     },
     {
         engine: 'playwright',
-        testFunction: runCreatePatientListTest
+        name: 'Create a patient list',
+        testFunction: withTimeouts(runCreatePatientListTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEditPatientListTest
+        name: 'Edit a patient list',
+        testFunction: withTimeouts(runEditPatientListTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDeletePatientListTest
+        name: 'Delete a patient list',
+        testFunction: withTimeouts(runDeletePatientListTest)
     },
     {
         engine: 'playwright',
-        testFunction: runManagePatientListTest
+        name: 'Manage patients in a list',
+        testFunction: withTimeouts(runManagePatientListTest)
     },
     {
         engine: 'playwright',
-        testFunction: runPatientListVisibilityCheckTest
+        name: 'Patient list created by one user should not be visible to another user',
+        testFunction: withTimeouts(runPatientListVisibilityCheckTest)
     },
     {
         engine: 'playwright',
-        testFunction: runSearchPatientByGivenNameTest
+        name: 'Search patient by given name',
+        testFunction: withTimeouts(runSearchPatientByGivenNameTest)
     },
     {
         engine: 'playwright',
-        testFunction: runSearchPatientByFullNameTest
+        name: 'Search patient by full name',
+        testFunction: withTimeouts(runSearchPatientByFullNameTest)
     },
     {
         engine: 'playwright',
-        testFunction: runSearchPatientByIdentifierTest
+        name: 'Search patient by identifier',
+        testFunction: withTimeouts(runSearchPatientByIdentifierTest)
     },
     {
         engine: 'playwright',
-        testFunction: runSearchPatientByPostalCodeTest
+        name: 'Search patient by postal code',
+        testFunction: withTimeouts(runSearchPatientByPostalCodeTest)
     },
     {
         engine: 'playwright',
-        testFunction: runSearchPatientByAgeTest
+        name: 'Search patient by age',
+        testFunction: withTimeouts(runSearchPatientByAgeTest)
     },
     {
         engine: 'playwright',
-        testFunction: runSearchPatientByDateOfBirthTest
+        name: 'Search patient by date of birth',
+        testFunction: withTimeouts(runSearchPatientByDateOfBirthTest)
     },
     {
         engine: 'playwright',
-        testFunction: runAddProcedureNoteTest
+        name: 'Add procedure note',
+        testFunction: withTimeouts(runAddProcedureNoteTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEditProcedureNoteTest
+        name: 'Edit procedure note',
+        testFunction: withTimeouts(runEditProcedureNoteTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDeleteProcedureNoteTest
+        name: 'Delete procedure note',
+        testFunction: withTimeouts(runDeleteProcedureNoteTest)
     },
     {
         engine: 'playwright',
-        testFunction: runSamplePatientsCreatedUponFirstLoginTest
+        name: 'Sample patients should be created upon the first user login',
+        testFunction: withTimeouts(runSamplePatientsCreatedUponFirstLoginTest)
     },
     {
         engine: 'playwright',
-        testFunction: runAddSoapNoteTest
+        name: 'Add soap note',
+        testFunction: withTimeouts(runAddSoapNoteTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEditSoapNoteTest
+        name: 'Edit soap note',
+        testFunction: withTimeouts(runEditSoapNoteTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDeleteSoapNoteTest
+        name: 'Delete soap note',
+        testFunction: withTimeouts(runDeleteSoapNoteTest)
     },
     {
         engine: 'playwright',
-        testFunction: runAddSurgicalOperationInstructionTest
+        name: 'Add surgical operation instructions',
+        testFunction: withTimeouts(runAddSurgicalOperationInstructionTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEditSurgicalOperationInstructionTest
+        name: 'Edit surgical operation instructions',
+        testFunction: withTimeouts(runEditSurgicalOperationInstructionTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDeleteSurgicalOperationInstructionTest
+        name: 'Delete surgical operation instructions',
+        testFunction: withTimeouts(runDeleteSurgicalOperationInstructionTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEstimateBloodLossFieldFieldValidationTest
+        name: 'Estimated blood loss field should allow valid input',
+        testFunction: withTimeouts(runEstimateBloodLossFieldFieldValidationTest)
     },
     {
         engine: 'playwright',
-        testFunction: runUserCreationAndFilteringTest
+        name: 'User creation and data filtering',
+        testFunction: withTimeouts(runUserCreationAndFilteringTest)
     },
     {
         engine: 'playwright',
-        testFunction: runAddVisitNoteTest
+        name: 'Add visit note',
+        testFunction: withTimeouts(runAddVisitNoteTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEditVisitNoteTest
+        name: 'Edit visit note',
+        testFunction: withTimeouts(runEditVisitNoteTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDeleteVisitNoteTest
+        name: 'Delete visit note',
+        testFunction: withTimeouts(runDeleteVisitNoteTest)
     },
     {
         engine: 'playwright',
-        testFunction: runStartPatientVisitTest
+        name: 'Start patient visit',
+        testFunction: withTimeouts(runStartPatientVisitTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEditPatientVisitTest
+        name: 'Edit patient visit',
+        testFunction: withTimeouts(runEditPatientVisitTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEndPatientVisitTest
+        name: 'End patient visit',
+        testFunction: withTimeouts(runEndPatientVisitTest)
     },
     {
         engine: 'playwright',
-        testFunction: runAddWardAdmissionRequestTest
+        name: 'Add ward admission request',
+        testFunction: withTimeouts(runAddWardAdmissionRequestTest)
     },
     {
         engine: 'playwright',
-        testFunction: runEditWardAdmissionRequestTest
+        name: 'Edit ward admission request',
+        testFunction: withTimeouts(runEditWardAdmissionRequestTest)
     },
     {
         engine: 'playwright',
-        testFunction: runDeleteWardAdmissionRequestTest
+        name: 'Delete ward admission request',
+        testFunction: withTimeouts(runDeleteWardAdmissionRequestTest)
     },
     {
         engine: 'playwright',
-        testFunction: runCreateWardAdmissionRequestTest
+        name: 'Creating ward admission request should create admission request in the respective location',
+        testFunction: withTimeouts(runCreateWardAdmissionRequestTest)
     }
 ];
 

@@ -1,4 +1,4 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
@@ -9,6 +9,7 @@ import {
     runDeleteProcedureNoteTest,
     runEditProcedureNoteTest
 } from "./procedure-note-form.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -24,7 +25,7 @@ async function setup(page: Page) {
 }
 
 // Sample patients should be created upon the first user login
-export async function runSamplePatientsCreatedUponFirstLoginTest(page: Page, browser: Browser) {
+export async function runSamplePatientsCreatedUponFirstLoginTest(page: Page) {
     await setup(page);
 
     // setup
@@ -51,15 +52,7 @@ export async function runSamplePatientsCreatedUponFirstLoginTest(page: Page, bro
     await expect(page.getByText('1 search result')).toBeVisible();
     await homePage.patientSearchBar().clear(), delay(1000);
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

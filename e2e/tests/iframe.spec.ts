@@ -1,8 +1,9 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 import {runEditPatientDetailsTest} from "./edit-patient-details.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -19,7 +20,7 @@ async function setup(page: Page) {
 }
 
 // Render server in an iframe after login, with all core features available
-export async function runRenderIframeTest(page: Page, browser: Browser) {
+export async function runRenderIframeTest(page: Page) {
     await setup(page);
 
     // setup
@@ -56,15 +57,7 @@ export async function runRenderIframeTest(page: Page, browser: Browser) {
     await expect(iframe.locator('header[aria-label="patient banner"]').getByText(/7 days/i)).toBeVisible();
     await expect(iframe.locator('header[aria-label="patient banner"]').getByText(/male/i)).toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {

@@ -54,218 +54,218 @@ import {
     runEditWardAdmissionRequestTest
 } from "./ward-admission-form.spec";
 
-test('Patient summary to load all the apps', async ({page, browser}) => {
-    await runPatientSummaryTest(page, browser);
+test('Patient summary to load all the apps', async ({page}) => {
+    await runPatientSummaryTest(page);
 });
 
-test('Demo patients should be present and accessible through patient search', async ({page, browser}) => {
-    await runDemoPatientsTest(page, browser);
+test('Demo patients should be present and accessible through patient search', async ({page}) => {
+    await runDemoPatientsTest(page);
 });
 
-test('Add discharge instructions', async ({page, browser}) => {
-    await runAddDischargeInstructionsTest(page, browser);
+test('Add discharge instructions', async ({page}) => {
+    await runAddDischargeInstructionsTest(page);
 });
 
-test('Edit discharge instructions', async ({page, browser}) => {
-    await runEditDischargeInstructionsTest(page, browser);
+test('Edit discharge instructions', async ({page}) => {
+    await runEditDischargeInstructionsTest(page);
 });
 
-test('Delete discharge instructions', async ({page, browser}) => {
-    await runDeleteDischargeInstructionsTest(page, browser);
+test('Delete discharge instructions', async ({page}) => {
+    await runDeleteDischargeInstructionsTest(page);
 });
 
-test('Add discharge summary', async ({page, browser}) => {
-    await runAddDischargeSummaryTest(page, browser);
+test('Add discharge summary', async ({page}) => {
+    await runAddDischargeSummaryTest(page);
 });
 
-test('Edit discharge summary', async ({page, browser}) => {
-    await runEditDischargeSummaryTest(page, browser);
+test('Edit discharge summary', async ({page}) => {
+    await runEditDischargeSummaryTest(page);
 });
 
-test('Delete discharge summary', async ({page, browser}) => {
-    await runDeleteDischargeSummaryTest(page, browser);
+test('Delete discharge summary', async ({page}) => {
+    await runDeleteDischargeSummaryTest(page);
 });
 
-test('Add a drug order', async ({page, browser}) => {
-    await runAddDrugOrderTest(page, browser);
+test('Add a drug order', async ({page}) => {
+    await runAddDrugOrderTest(page);
 });
 
-test('Modify a drug order', async ({page, browser}) => {
-    await runModifyDrugOrderTest(page, browser);
+test('Modify a drug order', async ({page}) => {
+    await runModifyDrugOrderTest(page);
 });
 
-test('Discontinue a drug order', async ({page, browser}) => {
-    await runDiscontinueDrugOrderTest(page, browser);
+test('Discontinue a drug order', async ({page}) => {
+    await runDiscontinueDrugOrderTest(page);
 });
 
-test('Add a drug order with free text dosage', async ({page, browser}) => {
-    await runAddDrugOrderWithFreeTextDosageTest(page, browser);
+test('Add a drug order with free text dosage', async ({page}) => {
+    await runAddDrugOrderWithFreeTextDosageTest(page);
 });
 
-test('Edit patient details', async ({page, browser}) => {
-    await runEditPatientDetailsTest(page, browser);
+test('Edit patient details', async ({page}) => {
+    await runEditPatientDetailsTest(page);
 });
 
-test('Render server in an iframe after login, with all core features available', async ({page, browser}) => {
-    await runRenderIframeTest(page, browser);
+test('Render server in an iframe after login, with all core features available', async ({page}) => {
+    await runRenderIframeTest(page);
 });
 
-test('Add an imaging order', async ({page, browser}) => {
-    await runAddImagingOrderTest(page, browser);
+test('Add an imaging order', async ({page}) => {
+    await runAddImagingOrderTest(page);
 });
 
-test('Modify an imaging order', async ({page, browser}) => {
-    await runModifyImagingOrderTest(page, browser);
+test('Modify an imaging order', async ({page}) => {
+    await runModifyImagingOrderTest(page);
 });
 
-test('Discontinue an imaging order', async ({page, browser}) => {
-    await runDiscontinueImagingOrderTest(page, browser);
+test('Discontinue an imaging order', async ({page}) => {
+    await runDiscontinueImagingOrderTest(page);
 });
 
-test('Add a lab test', async ({page, browser}) => {
-    await runAddLabOrderTest(page, browser);
+test('Add a lab test', async ({page}) => {
+    await runAddLabOrderTest(page);
 });
 
-test('Modify a lab order', async ({page, browser}) => {
-    await runModifyLabOrderTest(page, browser);
+test('Modify a lab order', async ({page}) => {
+    await runModifyLabOrderTest(page);
 });
 
-test('Discontinue a lab order', async ({page, browser}) => {
-    await runDiscontinueLabOrderTest(page, browser);
+test('Discontinue a lab order', async ({page}) => {
+    await runDiscontinueLabOrderTest(page);
 });
 
-test('Order basket should load all the orderables', async ({page, browser}) => {
-    await runOrderBasketLoadAllOrderablesTest(page, browser);
+test('Order basket should load all the orderables', async ({page}) => {
+    await runOrderBasketLoadAllOrderablesTest(page);
 });
 
-test('Create a patient list', async ({page, browser}) => {
-    await runCreatePatientListTest(page, browser);
+test('Create a patient list', async ({page}) => {
+    await runCreatePatientListTest(page);
 });
 
-test('Edit a patient list', async ({page, browser}) => {
-    await runEditPatientListTest(page, browser);
+test('Edit a patient list', async ({page}) => {
+    await runEditPatientListTest(page);
 });
 
-test('Delete a patient list', async ({page, browser}) => {
-    await runDeletePatientListTest(page, browser);
+test('Delete a patient list', async ({page}) => {
+    await runDeletePatientListTest(page);
 });
 
-test('Manage patients in a list', async ({page, browser}) => {
-    await runManagePatientListTest(page, browser);
+test('Manage patients in a list', async ({page}) => {
+    await runManagePatientListTest(page);
 });
 
-test('Patient list created by one user should not be visible to another user', async ({page, browser}) => {
-    await runPatientListVisibilityCheckTest(page, browser);
+test('Patient list created by one user should not be visible to another user', async ({page}) => {
+    await runPatientListVisibilityCheckTest(page);
 });
 
-test('Search patient by given name', async ({page, browser}) => {
-    await runSearchPatientByGivenNameTest(page, browser);
+test('Search patient by given name', async ({page}) => {
+    await runSearchPatientByGivenNameTest(page);
 });
 
-test('Search patient by full name', async ({page, browser}) => {
-    await runSearchPatientByFullNameTest(page, browser);
+test('Search patient by full name', async ({page}) => {
+    await runSearchPatientByFullNameTest(page);
 });
 
-test('Search patient by identifier', async ({page, browser}) => {
-    await runSearchPatientByIdentifierTest(page, browser);
+test('Search patient by identifier', async ({page}) => {
+    await runSearchPatientByIdentifierTest(page);
 });
 
-test('Search patient by postal code', async ({page, browser}) => {
-    await runSearchPatientByPostalCodeTest(page, browser);
+test('Search patient by postal code', async ({page}) => {
+    await runSearchPatientByPostalCodeTest(page);
 });
 
-test('Search patient by age', async ({page, browser}) => {
-    await runSearchPatientByAgeTest(page, browser);
+test('Search patient by age', async ({page}) => {
+    await runSearchPatientByAgeTest(page);
 });
 
-test('Search patient by date of birth', async ({page, browser}) => {
-    await runSearchPatientByDateOfBirthTest(page, browser);
+test('Search patient by date of birth', async ({page}) => {
+    await runSearchPatientByDateOfBirthTest(page);
 });
 
-test('Add procedure note', async ({page, browser}) => {
-    await runAddProcedureNoteTest(page, browser);
+test('Add procedure note', async ({page}) => {
+    await runAddProcedureNoteTest(page);
 });
 
-test('Edit procedure note', async ({page, browser}) => {
-    await runEditProcedureNoteTest(page, browser);
+test('Edit procedure note', async ({page}) => {
+    await runEditProcedureNoteTest(page);
 });
 
-test('Delete procedure note', async ({page, browser}) => {
-    await runDeleteProcedureNoteTest(page, browser);
+test('Delete procedure note', async ({page}) => {
+    await runDeleteProcedureNoteTest(page);
 });
 
-test('Sample patients should be created upon the first user login', async ({page, browser}) => {
-    await runSamplePatientsCreatedUponFirstLoginTest(page, browser);
+test('Sample patients should be created upon the first user login', async ({page}) => {
+    await runSamplePatientsCreatedUponFirstLoginTest(page);
 });
 
-test('Add soap note', async ({page, browser}) => {
-    await runAddSoapNoteTest(page, browser);
+test('Add soap note', async ({page}) => {
+    await runAddSoapNoteTest(page);
 });
 
-test('Edit soap note', async ({page, browser}) => {
-    await runEditSoapNoteTest(page, browser);
+test('Edit soap note', async ({page}) => {
+    await runEditSoapNoteTest(page);
 });
 
-test('Delete soap note', async ({page, browser}) => {
-    await runDeleteSoapNoteTest(page, browser);
+test('Delete soap note', async ({page}) => {
+    await runDeleteSoapNoteTest(page);
 });
 
-test('Add surgical operation instructions', async ({page, browser}) => {
-    await runAddSurgicalOperationInstructionTest(page, browser);
+test('Add surgical operation instructions', async ({page}) => {
+    await runAddSurgicalOperationInstructionTest(page);
 });
 
-test('Edit surgical operation instructions', async ({page, browser}) => {
-    await runEditSurgicalOperationInstructionTest(page, browser);
+test('Edit surgical operation instructions', async ({page}) => {
+    await runEditSurgicalOperationInstructionTest(page);
 });
 
-test('Delete surgical operation instructions', async ({page, browser}) => {
-    await runDeleteSurgicalOperationInstructionTest(page, browser);
+test('Delete surgical operation instructions', async ({page}) => {
+    await runDeleteSurgicalOperationInstructionTest(page);
 });
 
-test('Estimated blood loss field should allow valid input', async ({page, browser}) => {
-    await runEstimateBloodLossFieldFieldValidationTest(page, browser);
+test('Estimated blood loss field should allow valid input', async ({page}) => {
+    await runEstimateBloodLossFieldFieldValidationTest(page);
 });
 
-test('User creation and data filtering', async ({page, browser}) => {
-    await runUserCreationAndFilteringTest(page, browser);
+test('User creation and data filtering', async ({page}) => {
+    await runUserCreationAndFilteringTest(page);
 });
 
-test('Add visit note', async ({page, browser}) => {
-    await runAddVisitNoteTest(page, browser);
+test('Add visit note', async ({page}) => {
+    await runAddVisitNoteTest(page);
 });
 
-test('Edit visit note', async ({page, browser}) => {
-    await runEditVisitNoteTest(page, browser);
+test('Edit visit note', async ({page}) => {
+    await runEditVisitNoteTest(page);
 });
 
-test('Delete visit note', async ({page, browser}) => {
-    await runDeleteVisitNoteTest(page, browser);
+test('Delete visit note', async ({page}) => {
+    await runDeleteVisitNoteTest(page);
 });
 
-test('Start patient visit', async ({page, browser}) => {
-    await runStartPatientVisitTest(page, browser);
+test('Start patient visit', async ({page}) => {
+    await runStartPatientVisitTest(page);
 });
 
-test('Edit patient visit', async ({page, browser}) => {
-    await runEditPatientVisitTest(page, browser);
+test('Edit patient visit', async ({page}) => {
+    await runEditPatientVisitTest(page);
 });
 
-test('End patient visit', async ({page, browser}) => {
-    await runEndPatientVisitTest(page, browser);
+test('End patient visit', async ({page}) => {
+    await runEndPatientVisitTest(page);
 });
 
-test('Add ward admission request', async ({page, browser}) => {
-    await runAddWardAdmissionRequestTest(page, browser);
+test('Add ward admission request', async ({page}) => {
+    await runAddWardAdmissionRequestTest(page);
 });
 
-test('Edit ward admission request', async ({page, browser}) => {
-    await runEditWardAdmissionRequestTest(page, browser);
+test('Edit ward admission request', async ({page}) => {
+    await runEditWardAdmissionRequestTest(page);
 });
 
-test('Delete ward admission request', async ({page, browser}) => {
-    await runDeleteWardAdmissionRequestTest(page, browser);
+test('Delete ward admission request', async ({page}) => {
+    await runDeleteWardAdmissionRequestTest(page);
 });
 
-test('Creating ward admission request should create admission request in the respective location', async ({page, browser}) => {
-    await runCreateWardAdmissionRequestTest(page, browser);
+test('Creating ward admission request should create admission request in the respective location', async ({page}) => {
+    await runCreateWardAdmissionRequestTest(page);
 });

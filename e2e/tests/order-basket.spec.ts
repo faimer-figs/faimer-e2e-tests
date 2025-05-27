@@ -1,10 +1,11 @@
-import {Browser, expect, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import {test} from '../utils/configs/globalSetup';
 import {delay, HomePage} from '../utils/pages/home-page';
 import {Keycloak} from '../utils/pages/keycloak';
 import {VisitsPage} from '../utils/pages/visits-page';
 import {ChartPage} from '../utils/pages/chart-page';
 import {runAddLabOrderTest, runDiscontinueLabOrderTest, runModifyLabOrderTest} from "./lab-orders.spec";
+import {cleanup} from "./utils";
 
 let homePage: HomePage;
 let keycloak: Keycloak;
@@ -24,8 +25,8 @@ async function setup(page: Page) {
 }
 
 // Order basket should load all the orderables
-export async function runOrderBasketLoadAllOrderablesTest(page: Page, browser: Browser) {
-    await setup(page);
+export async function runOrderBasketLoadAllOrderablesTest(page: Page) {
+await setup(page);
 
     // setup
     await homePage.navigateToLoginPage();
@@ -44,15 +45,7 @@ export async function runOrderBasketLoadAllOrderablesTest(page: Page, browser: B
     await expect(page.getByText(/Lab orders/)).toBeVisible();
     await expect(page.getByText(/Imaging orders/)).toBeVisible();
 
-    await cleanup(browser);
-}
-
-async function cleanup(browser: Browser) {
-    const context = await browser.newContext();
-    const page = await context.newPage();
-    const keycloak = new Keycloak(page);
-    await keycloak.deleteUser();
-    await context.close();
+    await cleanup(page);
 }
 
 export const config = {
