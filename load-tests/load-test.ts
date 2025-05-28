@@ -7,31 +7,29 @@ export const config = {
     target: `${O3_URL}`,
     phases: [
         {
-            duration: 60,
-            arrivalRate: 1,
-            maxVusers: 20,
-            name: 'Warm-up',
+            duration: 600,
+            arrivalCount:6,
         },
-        {
-            duration: 60,
-            arrivalRate: 1,
-            rampTo: 5,
-            maxVusers: 20,
-            name: 'Ramp-up to Peak Load',
-        },
-        {
-            duration: 60,
-            arrivalRate: 5,
-            maxVusers: 20,
-            name: 'Peak Load',
-        },
-        {
-            duration: 60,
-            arrivalRate: 5,
-            rampTo: 1,
-            maxVusers: 20,
-            name: 'Cool Down',
-        },
+        // {
+        //     duration: 60,
+        //     arrivalRate: 1,
+        //     rampTo: 5,
+        //     maxVusers: 20,
+        //     name: 'Ramp-up to Peak Load',
+        // },
+        // {
+        //     duration: 60,
+        //     arrivalRate: 5,
+        //     maxVusers: 20,
+        //     name: 'Peak Load',
+        // },
+        // {
+        //     duration: 60,
+        //     arrivalRate: 5,
+        //     rampTo: 1,
+        //     maxVusers: 20,
+        //     name: 'Cool Down',
+        // },
     ],
     engines: {
         playwright: {

@@ -4,3 +4,4 @@ node_modules/
 /playwright/.cache/
 .idea/
 /e2e/tests/dist
+/load-tests/dist
