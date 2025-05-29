@@ -3,3 +3,5 @@ node_modules/
 /playwright-report/
 /playwright/.cache/
 .idea/
+/e2e/tests/dist
+/load-tests/dist
