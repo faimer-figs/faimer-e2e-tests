@@ -13,7 +13,7 @@
   <li>Add surgical operation instructions (surgical-operation-form.spec.ts)</li>
   <li>Add visit note (visit-note-form.spec.ts)</li>
   <li>Add ward admission request (ward-admission-form.spec.ts)</li>
-  <li>Create a patient list. (patient-list.spec.ts)</li>
+  <li>Create a patient list (patient-list.spec.ts)</li>
   <li>Creating ward admission request should create admission request in the respective location (ward-admission-form.spec.ts)</li>
   <li>Delete a patient list (patient-list.spec.ts)</li>
   <li>Delete discharge instructions (discharge-instructions-form.spec.ts)</li>
