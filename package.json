@@ -11,7 +11,8 @@
     "!playwright-report/"
   ],
   "scripts": {
-    "faimer-e2e": "npx playwright test"
+    "faimer-e2e": "npx playwright test",
+    "update-test-list": "node e2e/utils/scripts/update-test-list.js"
   },
   "keywords": [],
   "devDependencies": {
