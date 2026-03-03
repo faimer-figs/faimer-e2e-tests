@@ -153,14 +153,13 @@ export class Keycloak {
 
   async assignRoleToUser() {
     await this.page.getByRole('textbox', { name: /search/i }).fill('FAIMER Learner');
-    await this.page.getByRole('textbox', { name: /search/i }).press('Enter');
+    await this.page.getByRole('textbox', { name: /search/i }).press('Enter'), delay(2500);
     await this.page.getByRole('checkbox', { name: /select row/i }).check();
     await this.page.getByTestId('assign').click();
     await expect(this.page.getByText(/user role mapping successfully updated/i)).toBeVisible();
   }
 
   async deleteUser() {
-    await this.open();
     await this.page.goto(`${KEYCLOAK_URL}/admin/master/console/#/ozone/users`);
     await this.page.getByRole('textbox', { name: 'search' }).fill(`${user.userName}`);
     await this.page.getByRole('textbox', { name: 'search' }).press('Enter'), delay(1500);

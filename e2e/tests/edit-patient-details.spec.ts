@@ -48,10 +48,6 @@ test('Edit patient details', async ({ page }) => {
   await expect(patientBanner.getByText(/01-Jan-1952/i)).toBeVisible();
 });
 
-test.afterEach(async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const keycloak = new Keycloak(page);
+test.afterEach(async ({}) => {
   await keycloak.deleteUser();
-  await context.close();
 });

@@ -33,7 +33,7 @@ test('Start patient visit', async ({ page }) => {
 
   // verify
   await visitsPage.navigateToVisitsPage();
-  await expect(page.getByRole('heading', {name: 'Facility Visit'}).nth(0)).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Facility Visit' }).nth(0)).toBeVisible();
   await expect( page.locator('span[title="Active Visit"]').getByText(/active visit/i)).toBeVisible();
 });
 
@@ -47,14 +47,14 @@ test('Edit patient visit', async ({ page }) => {
   await homePage.clickOnPatientResult('Devan Modi');
   await visitsPage.startPatientVisit();
   await visitsPage.navigateToVisitsPage();
-  await expect(page.getByRole('heading', {name: 'Facility Visit'}).nth(0)).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Facility Visit' }).nth(0)).toBeVisible();
   await expect( page.locator('span[title="Active Visit"]').getByText(/active visit/i)).toBeVisible();
 
   // replay
   await visitsPage.updatePatientVisit();
 
   // verify
-  await expect(page.getByRole('heading', {name: 'Home Visit'}).nth(0)).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Home Visit' }).nth(0)).toBeVisible();
   await expect( page.locator('span[title="Active Visit"]').getByText(/active visit/i)).toBeVisible();
 });
 
@@ -68,7 +68,7 @@ test('End patient visit', async ({ page }) => {
   await homePage.clickOnPatientResult('Leon Wagner');
   await visitsPage.startPatientVisit();
   await visitsPage.navigateToVisitsPage();
-  await expect(page.getByRole('heading', {name: 'Facility Visit'}).nth(0)).toBeVisible();
+  await expect(page.getByRole('cell', { name: 'Facility Visit' }).nth(0)).toBeVisible();
   await expect( page.locator('span[title="Active Visit"]').getByText(/active visit/i)).toBeVisible();
 
   // replay
@@ -78,10 +78,6 @@ test('End patient visit', async ({ page }) => {
   await expect(page.getByText(/active visit/i)).not.toBeVisible();
 });
 
-test.afterEach(async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const keycloak = new Keycloak(page);
+test.afterEach(async ({}) => {
   await keycloak.deleteUser();
-  await context.close();
 });
