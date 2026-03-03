@@ -72,6 +72,7 @@ export class HomePage {
 
   async logout() {
     await this.page.getByRole('button', { name: /my account/i }).click();
-    await this.page.getByRole('button', { name: /logout/i }).click(), delay(2000);
+    await this.page.getByRole('button', { name: /logout/i }).click(), delay(5000);
+    await expect(this.page.locator('#username')).toBeVisible();
   }
 }

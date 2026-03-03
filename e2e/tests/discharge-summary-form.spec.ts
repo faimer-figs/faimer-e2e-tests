@@ -53,7 +53,7 @@ test('Add discharge summary', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Discharge Medication"]/following-sibling::span[1]')).toHaveText(`${dischargeMedications}`);
   await expect(page.locator('//span[normalize-space()="Procedure"]/following-sibling::span[1]')).toHaveText(`${procedure}`);
   await expect(page.locator('//span[normalize-space()="Hospital Course"]/following-sibling::span[1]')).toHaveText(`${hospitalCourse}`);
@@ -80,7 +80,7 @@ test('Edit discharge summary', async ({ page }) => {
   await formsPage.saveForm();
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Discharge Medication"]/following-sibling::span[1]')).toHaveText(`${dischargeMedications}`);
   await expect(page.locator('//span[normalize-space()="Procedure"]/following-sibling::span[1]')).toHaveText(`${procedure}`);
   await expect(page.locator('//span[normalize-space()="Hospital Course"]/following-sibling::span[1]')).toHaveText(`${hospitalCourse}`);
@@ -102,7 +102,7 @@ test('Edit discharge summary', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Discharge Medication"]/following-sibling::span[1]')).not.toHaveText(`${dischargeMedications}`);
   await expect(page.locator('//span[normalize-space()="Discharge Medication"]/following-sibling::span[1]')).toHaveText(`${updatedDischargeMedications}`);
   await expect(page.locator('//span[normalize-space()="Procedure"]/following-sibling::span[1]')).toHaveText(`${procedure}`);
@@ -136,7 +136,7 @@ test('Delete discharge summary', async ({ page }) => {
   await formsPage.saveForm();
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Discharge Medication"]/following-sibling::span[1]')).toHaveText(`${dischargeMedications}`);
   await expect(page.locator('//span[normalize-space()="Procedure"]/following-sibling::span[1]')).toHaveText(`${procedure}`);
   await expect(page.locator('//span[normalize-space()="Hospital Course"]/following-sibling::span[1]')).toHaveText(`${hospitalCourse}`);
@@ -156,13 +156,9 @@ test('Delete discharge summary', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await expect(page.getByText(/There are no encounters to display for this patient/).nth(0)).toBeVisible();
+  await expect(page.getByText(/No encounters to display/).nth(0)).toBeVisible();
 });
 
-test.afterEach(async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const keycloak = new Keycloak(page);
+test.afterEach(async ({}) => {
   await keycloak.deleteUser();
-  await context.close();
 });

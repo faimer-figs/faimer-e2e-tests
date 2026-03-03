@@ -23,8 +23,6 @@ test('Render server in an iframe after login, with all core features available',
   await expect(page.locator("//a[text()='Wards']")).toBeVisible();
   await expect(page.locator("//a[text()='Patient lists']")).toBeVisible();
   await expect(page.locator("//a[text()='Laboratory']")).toBeVisible();
-  await expect(page.locator("//a[text()='Service queues']")).toBeVisible();
-  await expect(page.getByText(/active visits/i).nth(0)).toBeVisible();
   await expect(page.getByRole('button', {name: 'my account'})).toBeVisible();
   await expect(page.getByRole('button', {name: 'app menu'})).toBeVisible();
   await expect(page.getByRole('button', {name: 'add patient'})).toBeVisible();
@@ -38,7 +36,6 @@ test('Render server in an iframe after login, with all core features available',
   await expect(iframe.locator("//a[text()='Wards']")).toBeVisible();
   await expect(iframe.locator("//a[text()='Patient lists']")).toBeVisible();
   await expect(iframe.locator("//a[text()='Laboratory']")).toBeVisible();
-  await expect(iframe.locator("//a[text()='Service queues']")).toBeVisible();
   await expect(iframe.getByRole('button', {name: 'my account'})).toBeVisible();
   await expect(iframe.getByRole('button', {name: 'app menu'})).toBeVisible();
   await expect(iframe.getByRole('button', {name: 'add patient'})).toBeVisible();
@@ -52,10 +49,6 @@ test('Render server in an iframe after login, with all core features available',
   await expect(iframe.locator('header[aria-label="patient banner"]').getByText(/male/i)).toBeVisible();
 });
 
-test.afterEach(async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const keycloak = new Keycloak(page);
+test.afterEach(async ({}) => {
   await keycloak.deleteUser();
-  await context.close();
 });

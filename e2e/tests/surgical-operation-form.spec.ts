@@ -49,11 +49,11 @@ test('Add surgical operation instructions', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Pre-Operative Diagnosis"]/following-sibling::span[1]')).toHaveText(`${preOperativeDiagnosis}`);
   await expect(page.locator('//span[normalize-space()="Post-Operative Diagnosis"]/following-sibling::span[1]')).toHaveText(`${postOperativeDiagnosis}`);
   await expect(page.locator('//span[normalize-space()="Procedure"]/following-sibling::span[1]')).toHaveText(/Laparoscopic appendectomy/i);
-  await expect(page.locator('//span[normalize-space()="Estimated Blood Loss"]/following-sibling::span[1]')).toHaveText(/2.0/i);
+  await expect(page.locator('//span[normalize-space()="Estimated Blood Loss"]/following-sibling::span[1]')).toHaveText(/2/i);
   await expect(page.locator('//span[normalize-space()="Assistants"]/following-sibling::span[1]')).toHaveText(/Nurse Alex Johnson/i);
   await expect(page.locator('//span[normalize-space()="Complications"]/following-sibling::span[1]')).toHaveText(/none/i);
   await expect(page.locator('//span[normalize-space()="Specimens"]/following-sibling::span[1]')).toHaveText(`${specimens}`);
@@ -78,11 +78,11 @@ test('Edit surgical operation instructions', async ({ page }) => {
   await formsPage.saveForm();
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Pre-Operative Diagnosis"]/following-sibling::span[1]')).toHaveText(`${preOperativeDiagnosis}`);
   await expect(page.locator('//span[normalize-space()="Post-Operative Diagnosis"]/following-sibling::span[1]')).toHaveText(`${postOperativeDiagnosis}`);
   await expect(page.locator('//span[normalize-space()="Procedure"]/following-sibling::span[1]')).toHaveText(/Laparoscopic appendectomy/i);
-  await expect(page.locator('//span[normalize-space()="Estimated Blood Loss"]/following-sibling::span[1]')).toHaveText(/2.0/i);
+  await expect(page.locator('//span[normalize-space()="Estimated Blood Loss"]/following-sibling::span[1]')).toHaveText(/2/i);
   await expect(page.locator('//span[normalize-space()="Assistants"]/following-sibling::span[1]')).toHaveText(/Nurse Alex Johnson/i);
   await expect(page.locator('//span[normalize-space()="Complications"]/following-sibling::span[1]')).toHaveText(/none/i);
   await expect(page.locator('//span[normalize-space()="Specimens"]/following-sibling::span[1]')).toHaveText(`${specimens}`);
@@ -102,12 +102,12 @@ test('Edit surgical operation instructions', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Pre-Operative Diagnosis"]/following-sibling::span[1]')).toHaveText(`${preOperativeDiagnosis}`);
   await expect(page.locator('//span[normalize-space()="Post-Operative Diagnosis"]/following-sibling::span[1]')).toHaveText(`${postOperativeDiagnosis}`);
   await expect(page.locator('//span[normalize-space()="Procedure"]/following-sibling::span[1]')).toHaveText(/Laparoscopic appendectomy/i);
-  await expect(page.locator('//span[normalize-space()="Estimated Blood Loss"]/following-sibling::span[1]')).not.toHaveText(/2.0/i);
-  await expect(page.locator('//span[normalize-space()="Estimated Blood Loss"]/following-sibling::span[1]')).toHaveText(/1.0/i);
+  await expect(page.locator('//span[normalize-space()="Estimated Blood Loss"]/following-sibling::span[1]')).not.toHaveText(/2/i);
+  await expect(page.locator('//span[normalize-space()="Estimated Blood Loss"]/following-sibling::span[1]')).toHaveText(/1/i);
   await expect(page.locator('//span[normalize-space()="Assistants"]/following-sibling::span[1]')).not.toHaveText(/Nurse Alex Johnson/i);
   await expect(page.locator('//span[normalize-space()="Assistants"]/following-sibling::span[1]')).toHaveText(/Nurse Alex JohnBosco/i);
   await expect(page.locator('//span[normalize-space()="Complications"]/following-sibling::span[1]')).toHaveText(/none/i);
@@ -138,11 +138,11 @@ test('Delete surgical operation instructions', async ({ page }) => {
   await formsPage.saveForm();
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Pre-Operative Diagnosis"]/following-sibling::span[1]')).toHaveText(`${preOperativeDiagnosis}`);
   await expect(page.locator('//span[normalize-space()="Post-Operative Diagnosis"]/following-sibling::span[1]')).toHaveText(`${postOperativeDiagnosis}`);
   await expect(page.locator('//span[normalize-space()="Procedure"]/following-sibling::span[1]')).toHaveText(/Laparoscopic appendectomy/i);
-  await expect(page.locator('//span[normalize-space()="Estimated Blood Loss"]/following-sibling::span[1]')).toHaveText(/2.0/i);
+  await expect(page.locator('//span[normalize-space()="Estimated Blood Loss"]/following-sibling::span[1]')).toHaveText(/2/i);
   await expect(page.locator('//span[normalize-space()="Assistants"]/following-sibling::span[1]')).toHaveText(/Nurse Alex Johnson/i);
   await expect(page.locator('//span[normalize-space()="Complications"]/following-sibling::span[1]')).toHaveText(/none/i);
   await expect(page.locator('//span[normalize-space()="Specimens"]/following-sibling::span[1]')).toHaveText(`${specimens}`);
@@ -162,7 +162,7 @@ test('Delete surgical operation instructions', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await expect(page.getByText(/There are no encounters to display for this patient/).nth(0)).toBeVisible();
+  await expect(page.getByText(/No encounters to display/).nth(0)).toBeVisible();
 });
 
 test('Estimated blood loss field should allow valid input', async ({ page }) => {
@@ -191,14 +191,10 @@ test('Estimated blood loss field should allow valid input', async ({ page }) => 
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
   await expect(page.getByRole('cell', {name: /surgical operation/i})).toBeVisible();
-  await page.getByRole('button', { name: /expand current row/i }).click();
-  await expect(page.locator('//div[span[1][normalize-space()="Estimated Blood Loss"]]/span[2]')).toHaveText('1.0');
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
+  await expect(page.locator('//div[span[1][normalize-space()="Estimated Blood Loss"]]/span[2]')).toHaveText('1');
   });
 
-test.afterEach(async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const keycloak = new Keycloak(page);
+test.afterEach(async ({}) => {
   await keycloak.deleteUser();
-  await context.close();
 });

@@ -52,7 +52,7 @@ test('Add procedure note', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Indication"]/following-sibling::span[1]')).toHaveText(`${indication}`);
   await expect(page.locator('//span[normalize-space()="Physician"]/following-sibling::span[1]')).toHaveText(`${physcian}`);
   await expect(page.locator('//span[normalize-space()="Procedure Summary"]/following-sibling::span[1]')).toHaveText(`${procedureSummary}`);
@@ -78,7 +78,7 @@ test('Edit procedure note', async ({ page }) => {
   await formsPage.saveForm();
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Indication"]/following-sibling::span[1]')).toHaveText(`${indication}`);
   await expect(page.locator('//span[normalize-space()="Physician"]/following-sibling::span[1]')).toHaveText(`${physcian}`);
   await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/April 22, 2025/i);
@@ -99,7 +99,7 @@ test('Edit procedure note', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).not.toHaveText(/April 22, 2025/i);
   await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/March 24, 2025/i);
   await expect(page.locator('//span[normalize-space()="Consent"]/following-sibling::span[1]')).not.toHaveText(`${consent}`);
@@ -127,7 +127,7 @@ test('Delete procedure note', async ({ page }) => {
   await formsPage.saveForm();
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Indication"]/following-sibling::span[1]')).toHaveText(`${indication}`);
   await expect(page.locator('//span[normalize-space()="Physician"]/following-sibling::span[1]')).toHaveText(`${physcian}`);
   await expect(page.locator('//span[normalize-space()="Time of Procedure"]/following-sibling::span[1]')).toHaveText(/April 22, 2025/i);
@@ -148,13 +148,9 @@ test('Delete procedure note', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await expect(page.getByText(/There are no encounters to display for this patient/).nth(0)).toBeVisible();
+  await expect(page.getByText(/No encounters to display/).nth(0)).toBeVisible();
 });
 
-test.afterEach(async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const keycloak = new Keycloak(page);
+test.afterEach(async ({}) => {
   await keycloak.deleteUser();
-  await context.close();
 });

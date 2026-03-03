@@ -103,10 +103,12 @@ export class ClinicalFormsPage {
   }
 
   async navigateToEncounterPage() {
+    await this.page.getByRole('row', { name: 'Expand current row Today' }).nth(0).getByLabel('Expand current row').click();
     await this.page.getByRole('tab', { name: /Encounters/, exact: true }).first().click();
   }
 
   async navigateToNotesPage() {
+    await this.page.getByRole('row', { name: 'Expand current row Today' }).nth(0).getByLabel('Expand current row').click();
     await this.page.getByRole('tab', { name: 'Notes', exact: true }).first().click();
   }
 
@@ -116,7 +118,7 @@ export class ClinicalFormsPage {
 
   async updateVisitNote() {
     await this.page.getByRole('tab', { name: /Encounters/, exact: true }).first().click();
-    await this.page.getByRole('button', { name: /expand current row/i }).click();
+    await this.page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
     await this.page.getByRole('button', { name: /edit this encounter/i }).click();
     await this.page.locator('#visitNote').fill(updatedVisitNote);
     await this.page.getByRole('button', { name: /save/i }).click();
