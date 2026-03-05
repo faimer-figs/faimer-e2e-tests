@@ -140,10 +140,6 @@ test('Search patient by date of birth', async ({ page }) => {
   await expect(page.locator('header[aria-label="patient banner"]').getByText('Susan Lopez')).toBeVisible();
 });
 
-test.afterEach(async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const keycloak = new Keycloak(page);
+test.afterEach(async ({}) => {
   await keycloak.deleteUser();
-  await context.close();
 });

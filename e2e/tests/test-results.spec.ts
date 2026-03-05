@@ -59,10 +59,6 @@ test('Display test results in tablet mode', async ({ page, context }) => {
   await expect(page.locator('text=White blood cells').locator('xpath=ancestor::tr').nth(0)).toContainText('12.2');
 });
 
-test.afterEach(async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const keycloak = new Keycloak(page);
+test.afterEach(async ({}) => {
   await keycloak.deleteUser();
-  await context.close();
 });

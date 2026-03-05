@@ -49,7 +49,7 @@ test('Add ward admission request', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage(), delay(2000);
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Attending physician"]/following-sibling::span[1]')).toHaveText(`${attendingPhysician}`);
   await expect(page.locator('//span[normalize-space()="Medications"]/following-sibling::span[1]')).toHaveText(/perform medication reconciliation/i);
   await expect(page.locator('//span[normalize-space()="Vitals"]/following-sibling::span[1]')).toHaveText(/per shift/i);
@@ -78,7 +78,7 @@ test('Edit ward admission request', async ({ page }) => {
   await formsPage.saveForm();
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage(), delay(2000);
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Attending physician"]/following-sibling::span[1]')).toHaveText(`${attendingPhysician}`);
   await expect(page.locator('//span[normalize-space()="Medications"]/following-sibling::span[1]')).toHaveText(/perform medication reconciliation/i);
   await expect(page.locator('//span[normalize-space()="Vitals"]/following-sibling::span[1]')).toHaveText(/per shift/i);
@@ -102,7 +102,7 @@ test('Edit ward admission request', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Attending physician"]/following-sibling::span[1]')).not.toHaveText(`${attendingPhysician}`);
   await expect(page.locator('//span[normalize-space()="Attending physician"]/following-sibling::span[1]')).toHaveText(`${updatedAttendingPhysician}`);
   await expect(page.locator('//span[normalize-space()="Code status"]/following-sibling::span[1]')).not.toHaveText(/comfort measures/i);
@@ -136,7 +136,7 @@ test('Delete ward admission request', async ({ page }) => {
   await formsPage.saveForm();
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage(), delay(2000);
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await expect(page.locator('//span[normalize-space()="Attending physician"]/following-sibling::span[1]')).toHaveText(`${attendingPhysician}`);
   await expect(page.locator('//span[normalize-space()="Medications"]/following-sibling::span[1]')).toHaveText(/perform medication reconciliation/i);
   await expect(page.locator('//span[normalize-space()="Vitals"]/following-sibling::span[1]')).toHaveText(/per shift/i);
@@ -160,7 +160,7 @@ test('Delete ward admission request', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToEncounterPage();
-  await expect(page.getByText(/There are no encounters to display for this patient/).nth(0)).toBeVisible();
+  await expect(page.getByText(/No encounters to display/).nth(0)).toBeVisible();
 });
 
 test('Creating ward admission request should create admission request in the respective location', async ({ page }) => {
@@ -187,10 +187,6 @@ test('Creating ward admission request should create admission request in the res
   await expect(page.getByText('Florencia Klinger')).toBeVisible();
 });
 
-test.afterEach(async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const keycloak = new Keycloak(page);
+test.afterEach(async ({}) => {
   await keycloak.deleteUser();
-  await context.close();
 });

@@ -98,7 +98,7 @@ test('Delete visit note', async ({ page }) => {
 
   // replay
   await formsPage.navigateToEncounterPage();
-  await page.getByRole('button', { name: /expand current row/i }).click();
+  await page.getByRole('tabpanel', { name: 'Encounters' }).getByLabel('Expand current row').click();
   await formsPage.deleteEncounter();
   await homePage.navigateToHomePage();
   await homePage.patientSearchIcon().click();
@@ -109,13 +109,9 @@ test('Delete visit note', async ({ page }) => {
   // verify
   await visitsPage.navigateToVisitsPage();
   await formsPage.navigateToNotesPage(), delay(2000);
-  await expect(page.getByText(/there are no notes to display for this patient/i).nth(0)).toBeVisible();
+  await expect(page.getByText(/There are no notes to display for this patient/).nth(0)).toBeVisible();
 });
 
-test.afterEach(async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const keycloak = new Keycloak(page);
+test.afterEach(async ({}) => {
   await keycloak.deleteUser();
-  await context.close();
 });

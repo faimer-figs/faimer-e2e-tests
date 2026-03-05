@@ -106,10 +106,6 @@ test('Discontinue an imaging order', async ({ page }) => {
   await expect(page.locator("//tr[td[text()='Imaging orders'] and td[text()='MRI brain (with contrast)']]//div[@data-priority='routine']")).not.toBeVisible();
 });
 
-test.afterEach(async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const keycloak = new Keycloak(page);
+test.afterEach(async ({}) => {
   await keycloak.deleteUser();
-  await context.close();
 });

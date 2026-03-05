@@ -151,10 +151,6 @@ test('Add a drug order with free text dosage', async ({ page }) => {
   await expect(page.getByText(/indication hypertension/i).nth(0)).toBeVisible();
 });
 
-test.afterEach(async ({ browser }) => {
-  const context = await browser.newContext();
-  const page = await context.newPage();
-  const keycloak = new Keycloak(page);
+test.afterEach(async ({}) => {
   await keycloak.deleteUser();
-  await context.close();
 });

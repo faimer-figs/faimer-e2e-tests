@@ -25,17 +25,19 @@ export class PatientListsPage {
 
   async addNewPatientList(listName: string, description: string) {
     await this.page.getByRole('button', { name: /new list/i }).click();
-    await this.page.getByLabel(/list name/i).fill(listName);
-    await this.page.getByLabel(/describe the purpose of this list in a few words/i).fill(description);
-    await this.page.getByRole('button', { name: /create list/i }).click();
+    await this.page.getByRole('textbox', { name: /list name/i }).nth(1).fill(listName);
+    await this.page.locator('[id="downshift-\\:r1i\\:-toggle-button"]').click();
+    await this.page.getByRole('option', { name: /my list/i }).locator('div').click();
+    await this.page.getByRole('textbox', { name: /describe the purpose of this list in a few words/i }).nth(1).fill(description);
+    await this.page.getByRole('button', { name: /create list/i }).nth(1).click();
   }
 
   async editPatientList(listName: string, description: string) {
     await this.page.getByRole('button', { name: /actions/i }).click();
     await this.page.getByRole('menuitem', { name: /edit name or description/i }).click();
-    await this.page.getByLabel(/list name/i).fill(listName);
-    await this.page.getByLabel(/describe the purpose of this list in a few words/i).fill(description);
-    await this.page.getByRole('button', { name: /edit list/i }).click();
+    await this.page.getByRole('textbox', { name: /list name/i }).nth(1).fill(listName);
+    await this.page.getByRole('textbox', { name: /describe the purpose of this list in a few words/i }).nth(1).fill(description);
+    await this.page.getByRole('button', { name: /edit list/i }).nth(1).click();
   }
 
   async searchPatientList(listName: string) {
@@ -47,7 +49,7 @@ export class PatientListsPage {
     await expect(this.page.getByRole('menuitem', { name: /add to list/i })).toBeVisible();
     await this.page.getByRole('menuitem', { name: /add to list/i }).click();
     await this.page.locator('label').filter({ hasText: 'Cohort' }).click();
-    await this.page.getByRole('button', { name: /add to list/i }).click();
+    await this.page.getByRole('button', { name: 'Save' }).click();
   }
   
   async removePatientToList() {
