@@ -167,7 +167,6 @@ export class Keycloak {
   }
 
   async deleteUsers() {
-    await this.open();
     await this.page.goto(`${KEYCLOAK_URL}/admin/master/console/#/ozone/users`);
     await this.page.getByRole('textbox', { name: 'search' }).fill(`${user.userName}`);
     await this.page.getByRole('textbox', { name: 'search' }).press('Enter'), delay(1500);
