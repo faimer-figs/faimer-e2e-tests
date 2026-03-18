@@ -21,6 +21,7 @@ export class EditPage {
     await this.page.getByRole('button', { name: /actions/i, exact: true }).click();
     await this.page.getByRole('menuitem', { name: /edit patient details/i }).click(), delay(4000);
     await this.page.locator('#givenName').fill('Daan'), delay(2000);
+    await this.page.getByRole('tab', { name: /no/i }).nth(1).click();
     await this.page.locator('#yearsEstimated').fill('73');
     await this.page.getByRole('button', { name: /update patient/i }).click();
     await expect(this.page.getByText(/patient details updated/i)).toBeVisible();

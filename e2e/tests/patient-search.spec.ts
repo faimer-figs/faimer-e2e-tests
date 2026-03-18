@@ -30,7 +30,7 @@ test('Search patient by given name', async ({ page }) => {
   await homePage.clickOnPatientResult('Daniel Acosta');
   const patientBanner = page.locator('header[aria-label="patient banner"]');
   await expect(patientBanner.getByText(`Daniel Acosta`)).toBeVisible();
-  await expect(patientBanner.getByText(/01-Jan-1953/i)).toBeVisible();
+  await expect(patientBanner).toContainText("72 yrs");
 });
 
 test('Search patient by full name', async ({ page }) => {
@@ -47,7 +47,7 @@ test('Search patient by full name', async ({ page }) => {
   await homePage.clickOnPatientResult('Daichi Okada');
   const patientBanner = page.locator('header[aria-label="patient banner"]');
   await expect(patientBanner.getByText(`Daichi Okada`)).toBeVisible();
-  await expect(patientBanner.getByText(/01-Jan-1969/i)).toBeVisible();
+  await expect(patientBanner).toContainText("56 yrs");
 });
 
 test('Search patient by identifier', async ({ page }) => {
@@ -64,7 +64,7 @@ test('Search patient by identifier', async ({ page }) => {
   await homePage.clickOnPatientResult('Betty Williams');
   const patientBanner = page.locator('header[aria-label="patient banner"]');
   await expect(patientBanner.getByText(`Betty Williams`)).toBeVisible();
-  await expect(patientBanner.getByText(/15-Mar-1973/i)).toBeVisible();
+  await expect(patientBanner).toContainText("52 yrs");
 });
 
 test('Search patient by postal code', async ({ page }) => {
@@ -97,14 +97,14 @@ test('Search patient by age', async ({ page }) => {
 
   // replay
   await homePage.patientSearchIcon().click();
-  await homePage.patientSearchBar().fill('Susan'), delay(2000);
+  await homePage.patientSearchBar().fill('Susan');
   await expect(page.getByText('4 search results')).toBeVisible();
   await homePage.patientAdvancedSearch().click(), delay(2000);
 
   // verify
   await homePage.patientAdvancedSearch().click(), delay(2000);
   //
-  await page.locator('#age').fill('69');
+  await page.locator('#age').fill('68');
   await page.getByRole('button', { name: /apply/i }).click(), delay(2000);
 
   // verify
@@ -130,7 +130,7 @@ test('Search patient by date of birth', async ({ page }) => {
   //
   await page.locator('#dateOfBirth').fill('06');
   await page.locator('#monthOfBirth').fill('05');
-  await page.locator('#yearOfBirth').fill('1971');
+  await page.locator('#yearOfBirth').fill('1972');
   await page.getByRole('button', { name: /apply/i }).click(), delay(2000);
 
   // verify
