@@ -29,7 +29,7 @@ test('Edit patient details', async ({ page }) => {
   await homePage.clickOnPatientResult('Daniel Acosta');
   const patientBanner = page.locator('header[aria-label="patient banner"]');
   await expect(patientBanner.getByText(`Daniel Acosta`)).toBeVisible();
-  await expect(patientBanner.getByText(/01-Jan-1953/i)).toBeVisible();
+  await expect(patientBanner).toContainText("72 yrs");
 
   // replay
   await editPage.updatePatientDetails();
@@ -44,8 +44,8 @@ test('Edit patient details', async ({ page }) => {
   await expect(page.getByText('1 search result')).toBeVisible();
   await homePage.clickOnPatientResult('Daan Acosta');
   await expect(patientBanner.getByText('Daan Acosta')).toBeVisible();
-  await expect(patientBanner.getByText(/01-Jan-1953/i)).not.toBeVisible();
-  await expect(patientBanner.getByText(/01-Jan-1952/i)).toBeVisible();
+  await expect(patientBanner).not.toContainText("72 yrs");
+  await expect(patientBanner).toContainText("73 yrs");
 });
 
 test.afterEach(async ({}) => {
