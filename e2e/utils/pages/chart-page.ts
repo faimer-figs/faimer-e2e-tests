@@ -18,4 +18,7 @@ export class ChartPage {
   async switchToTabletView() {
     await this.page.setViewportSize({ width: 750, height: 1060 });
   }
+  async switchToDesktopView() {
+    await this.page.setViewportSize({ width: 1280, height: 800 });
+  }
 }

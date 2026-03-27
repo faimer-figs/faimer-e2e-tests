@@ -48,10 +48,10 @@ test('Display test results in tablet mode', async ({ page, context }) => {
   await chartPage.switchToTabletView();
   await context.setDefaultTimeout(5000);
   await resultsPage.navigateToOverTimeView();
-  await expect(page.locator('div:has-text("X Ray chest (PA)")').locator('xpath=following-sibling::div[1]/p').nth(0)).toHaveText('Left lower lobe infiltrate suspicious for pneumonia');
-  await expect(page.locator('div:has-text("Haemoglobin")').locator('xpath=following-sibling::div[1]/p').nth(0)).toHaveText('13.2');
-  await expect(page.locator('div:has-text("Platelets")').locator('xpath=following-sibling::div[1]/p').nth(0)).toHaveText('226');
-  await expect(page.locator('div:has-text("White blood cells")').locator('xpath=following-sibling::div[1]/p').nth(0)).toHaveText('12.2');
+  await expect(page.locator('tbody tr').filter({hasText: 'X Ray chest (PA)'})).toContainText('Left lower lobe infiltrate suspicious for pneumonia');
+  await expect(page.locator('tbody tr').filter({hasText: 'Haemoglobin'})).toContainText('13.2');
+  await expect(page.locator('tbody tr').filter({hasText: 'Platelets'})).toContainText('226');
+  await expect(page.locator('tbody tr').filter({hasText: 'White blood cells'})).toContainText('12.2');
   await resultsPage.navigateToIndividualTestsView();
   await expect(page.locator('text=X Ray chest (PA)').locator('xpath=ancestor::tr')).toContainText('Left lower lobe infiltrate suspicious for pneumonia');
   await expect(page.locator('text=Haemoglobin').locator('xpath=ancestor::tr').nth(0)).toContainText('13.2');
@@ -59,6 +59,8 @@ test('Display test results in tablet mode', async ({ page, context }) => {
   await expect(page.locator('text=White blood cells').locator('xpath=ancestor::tr').nth(0)).toContainText('12.2');
 });
 
-test.afterEach(async ({}) => {
+test.afterEach(async ({context}) => {
+  await chartPage.switchToDesktopView();
+  await context.setDefaultTimeout(5000);
   await keycloak.deleteUser();
 });
