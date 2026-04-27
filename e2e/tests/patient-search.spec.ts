@@ -104,7 +104,7 @@ test('Search patient by age', async ({ page }) => {
   // verify
   await homePage.patientAdvancedSearch().click(), delay(2000);
   //
-  await page.locator('#age').fill('68');
+  await page.locator('#age').fill('69');
   await page.getByRole('button', { name: /apply/i }).click(), delay(2000);
 
   // verify
