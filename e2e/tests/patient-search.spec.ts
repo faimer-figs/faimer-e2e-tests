@@ -57,7 +57,7 @@ test('Search patient by identifier', async ({ page }) => {
 
   // replay
   await homePage.patientSearchIcon().click();
-  await homePage.patientSearchBar().fill('100000Y'), delay(2000);
+  await homePage.patientSearchBar().fill('100001W'), delay(2000);
   await expect(page.getByText('1 search result')).toBeVisible();
 
   // verify
